@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FirstNavigation</string>
+    <string name="welcome">欢迎登陆第一通航</string>
+    <string name="code">|  获取验证码</string>
+    <string name="selfMotion">未注册手机验证后自动登陆</string>
+    <string name="me">我已同意并阅读</string>
+    <string name="agreement">用户协议</string>
+    <string name="strip">————————</string>
+    <string name="tripartite">第三方账号登陆</string>
+    <string name="username">请输入用户名</string>
+</resources>
