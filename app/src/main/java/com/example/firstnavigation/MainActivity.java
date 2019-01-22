@@ -1,8 +1,6 @@
 package com.example.firstnavigation;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,22 +12,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firstnavigation.activitys.InformationActivity;
 import com.example.firstnavigation.activitys.MessageActivity;
-import com.example.firstnavigation.base.activity.BaseActivity;
-import com.example.firstnavigation.beans.ListNews;
-import com.example.firstnavigation.contact.ListNewsCon;
-import com.example.firstnavigation.presenter.ListNewsPresenter;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.example.firstnavigation.activitys.SanfangActivity;
+import com.example.firstnavigation.base.activity.SimpleActivity;
+import com.example.firstnavigation.shujukuBeans.DataBaseHelep;
+import com.example.firstnavigation.shujukuBeans.Studnet;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity<ListNewsCon.ListNewsConV, ListNewsPresenter<ListNewsCon.ListNewsConV>> implements ListNewsCon.ListNewsConV {
+public class MainActivity extends SimpleActivity {
 
     @BindView(R.id.image_cross)
     ImageView mImageCross;
@@ -53,11 +52,23 @@ public class MainActivity extends BaseActivity<ListNewsCon.ListNewsConV, ListNew
     ImageView mQq;
     @BindView(R.id.Sina)
     ImageView mSina;
-
+    private DataBaseHelep mInsh;
+    private Intent mIntent;
 
     @Override
-    protected void initEvenAndData() {
-        mPresenter.getListNews("");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected int getActivityColor() {
+        return R.color.colorWhite;
+    }
+
+    @Override
+    protected void initData() {
+        mInsh = DataBaseHelep.getInsh();
         mBtLogin.setClickable(false);
         mEtPhone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,40 +102,6 @@ public class MainActivity extends BaseActivity<ListNewsCon.ListNewsConV, ListNew
 
             }
         });
-//        CrashReport.testJavaCrash();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected ListNewsPresenter<ListNewsCon.ListNewsConV> createPresenter() {
-        return new ListNewsPresenter<>();
-    }
-
-
-    @Override
-    protected View getActivityID() {
-        return mLinear;
-    }
-
-
-    @Override
-    public void showError(String error) {
-
-    }
-
-    @Override
-    public void showListNews(ListNews listNews) {
-        Log.e("11111111", listNews.toString());
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
     private void gaibian() {
@@ -137,7 +114,6 @@ public class MainActivity extends BaseActivity<ListNewsCon.ListNewsConV, ListNew
             mBtLogin.setImageResource(R.drawable.login2);
             mBtLogin.setClickable(false);
         }
-
     }
 
     @Override
@@ -160,6 +136,7 @@ public class MainActivity extends BaseActivity<ListNewsCon.ListNewsConV, ListNew
 
                 break;
             case R.id.wechat:
+                startActivity(new Intent(MainActivity.this, SanfangActivity.class));
                 break;
             case R.id.qq:
                 QQdneglu();
@@ -178,17 +155,16 @@ public class MainActivity extends BaseActivity<ListNewsCon.ListNewsConV, ListNew
 
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                Intent intent = new Intent(MainActivity.this, SanfangActivity.class);
                 for (String key : map.keySet()) {
                     Log.e("sunxu--11", "key=" + key + "value=" + map.get(key));
-
+                    intent.putExtra("iiiii", map.get("iconurl"));
                 }
-
+                startActivity(intent);
             }
 
             @Override
             public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
-                Log.e("sunxu--22", throwable.getMessage());
 
             }
 
@@ -205,15 +181,31 @@ public class MainActivity extends BaseActivity<ListNewsCon.ListNewsConV, ListNew
             int randomnum = (int) (Math.random() * 9);
             buffer1.append(randomnum);
         }
-        mEtVerification.setText(buffer1.toString());
+        String phone = mEtPhone.getText().toString();
+        if (phone.matches("[1][3,4,5,7,8][0-9]{9}")) {
+            mEtVerification.setText(buffer1.toString());
+        } else {
+            Toast.makeText(MainActivity.this, "请输入正确的手机号", Toast.LENGTH_LONG).show();
+        }
     }
 
     @OnClick(R.id.bt_login)
     public void onViewClicked() {
         String phone = mEtPhone.getText().toString();
         String string = mEtVerification.getText().toString();
-        if (phone.matches("[0-9]{11}") && string.matches("[0-9]{6}") && mCbConsent.isChecked()) {
-            startActivity(new Intent(MainActivity.this, MessageActivity.class));
+        if (phone.matches("[1][3,4,5,7,8][0-9]{9}") && string.matches("[0-9]{6}") && mCbConsent.isChecked()) {
+            List<Studnet> studnets = mInsh.selectS(phone);
+            mIntent = new Intent(MainActivity.this, MessageActivity.class);
+            if (studnets != null && studnets.size() > 0) {
+                if (studnets.get(0).getIsStorage()) {
+                    startActivity(new Intent(MainActivity.this, InformationActivity.class));
+                } else {
+                    startActivity(mIntent);
+                }
+            } else {
+                mIntent.putExtra("phone", phone);
+                startActivity(mIntent);
+            }
         } else {
             Toast.makeText(this, "手机号或验证码错误", Toast.LENGTH_LONG).show();
         }

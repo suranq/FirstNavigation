@@ -2,6 +2,7 @@ package com.example.firstnavigation.activitys;
 
 import android.Manifest;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -25,17 +27,32 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.firstnavigation.R;
+import com.example.firstnavigation.base.activity.BaseActivity;
 import com.example.firstnavigation.base.activity.SimpleActivity;
+import com.example.firstnavigation.beans.HeadImage;
+import com.example.firstnavigation.contact.HeadImageCon;
+import com.example.firstnavigation.json.JsonHeadImage;
+import com.example.firstnavigation.presenter.HeadImagePresenter;
+import com.example.firstnavigation.shujukuBeans.DataBaseHelep;
+import com.example.firstnavigation.shujukuBeans.Studnet;
+import com.example.firstnavigation.utils.Constants;
+import com.google.gson.Gson;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MessageActivity extends SimpleActivity {
+public class MessageActivity extends BaseActivity<HeadImageCon.ListNewsConV, HeadImagePresenter<HeadImageCon.ListNewsConV>> implements HeadImageCon.ListNewsConV {
 
     @BindView(R.id.iv_return)
     ImageView mIvReturn;
@@ -63,12 +80,20 @@ public class MessageActivity extends SimpleActivity {
     private File tempFile;
     //最后显示的图片文件
     private String mFile;
+    private int mUserName;
+    private int mS;
+    private PopupWindow mPopupWindow;
+    private Bitmap mPhoto;
+    private String mPhone;
+
+    @Override
+    protected int getActivityColor() {
+        return R.color.colorBlack;
+    }
 
     @Override
     protected void initData() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
-                1);
+
     }
 
     @Override
@@ -86,31 +111,70 @@ public class MessageActivity extends SimpleActivity {
                 showPop();
                 break;
             case R.id.iv_ok:
-                String username = mEdUsername.getText().toString();
-                if (username == null && username.length() == 0) {
-
+                if (mEdUsername != null && mEdUsername.length() > 0) {
+                    startActivity(new Intent(MessageActivity.this,InformationActivity.class));
+                    DataBaseHelep.getInsh().insert(new Studnet(null, mPhone,mEdUsername.getText().toString(),BitmaptoString(mPhoto),true));
                 } else {
-
+                    showPoPName();
                 }
                 break;
             case R.id.te_skip:
-                startActivity(new Intent());
                 break;
         }
     }
 
-    private void showPop() {
-        View inflate = View.inflate(MessageActivity.this, R.layout.popup, null);
+    private void showPoPName() {
+        View inflate = View.inflate(MessageActivity.this, R.layout.user_name, null);
+        LinearLayout lin = inflate.findViewById(R.id.lin);
+        final TextView username = inflate.findViewById(R.id.tv_userName);
+        Button but_que = inflate.findViewById(R.id.but_que);
+        Button butxiu = inflate.findViewById(R.id.but_xiu);
+        mLinearLayout.setAlpha(0.5f);
         final PopupWindow popupWindow = new PopupWindow(inflate);
-        LinearLayout layout = inflate.findViewById(R.id.layout);
-        popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        popupWindow.showAtLocation(mLinearLayout, Gravity.CENTER, 300, 300);
-        layout.setOnClickListener(new View.OnClickListener() {
+        username.setText(getUserName());
+
+        popupWindow.showAtLocation(mLinearLayout, Gravity.CENTER, 0, 0);
+
+        mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                mLinearLayout.setAlpha(1);
+            }
+        });
+        but_que.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEdUsername.setText(usernamea());
+                popupWindow.dismiss();
+                mLinearLayout.setAlpha(1);
+            }
+        });
+        butxiu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                mLinearLayout.setAlpha(1);
+            }
+        });
+
+    }
+
+    private void showPop() {
+        View inflate = View.inflate(MessageActivity.this, R.layout.popup, null);
+        mPopupWindow = new PopupWindow(inflate);
+        LinearLayout layout = inflate.findViewById(R.id.layout);
+        mPopupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        mPopupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+
+        mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER, 300, 300);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupWindow.dismiss();
             }
         });
         Button btPhotograph = inflate.findViewById(R.id.bt_photograph);
@@ -130,9 +194,16 @@ public class MessageActivity extends SimpleActivity {
     }
 
     private void getPicFromAlbm() {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);
+       /* Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image*//*");
+        startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);*/
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+        startActivityForResult(intent, Constants.REQUEST_PHOTO);
+        mPopupWindow.dismiss();
+
     }
 
     private void showPhotograph() {
@@ -143,7 +214,7 @@ public class MessageActivity extends SimpleActivity {
         //判断版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", tempFile);
+            Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", tempFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
             Log.e("getPicFromCamera", contentUri.toString());
         } else {    //否则使用Uri.fromFile(file)方法获取Uri
@@ -165,7 +236,7 @@ public class MessageActivity extends SimpleActivity {
                 if (resultCode == RESULT_OK) {
                     //用相机返回的照片去调用剪裁也需要对Uri进行处理
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", tempFile);
+                        Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", tempFile);
                         startPhotoZoom(contentUri);//开始对图片进行裁剪处理
                     } else {
                         startPhotoZoom(Uri.fromFile(tempFile));//开始对图片进行裁剪处理
@@ -181,14 +252,55 @@ public class MessageActivity extends SimpleActivity {
             case CROP_SMALL_PICTURE:  //调用剪裁后返回
                 if (intent != null) {
                     // 让刚才选择裁剪得到的图片显示在界面上
-                    Bitmap photo = BitmapFactory.decodeFile(mFile);
-                    mImageBighead.setImageBitmap(photo);
+                    mPhoto = BitmapFactory.decodeFile(mFile);
+                    mImageBighead.setImageBitmap(mPhoto);
                 } else {
                     Log.e("data", "data为空");
                 }
                 break;
+            case Constants.REQUEST_CODE_TAKE_PICTURE:
+                break;
+            case Constants.REQUEST_PHOTO:
+                if (intent != null) {
+                    Uri selectedImage = intent.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String picturePath = cursor.getString(columnIndex);
+                    cursor.close();
+                    File file1 = getFile(BitmapFactory.decodeFile(picturePath));
+                    Log.d("moxun", "onActivityResult: " + file1.getPath());
+                    // putheadImg.setText("更换图像");
+                    HashMap<String, Object> map1 = new HashMap<>();
+                    map1.put("userId", "049de01db14a4c8184faa0aca7facf8a");
+                    map1.put("file", file1);
+                    mPresenter.getHeadImage(map1);
+                }
+                break;
         }
 
+    }
+
+    public File getFile(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        File file = new File(Environment.getExternalStorageDirectory() + "/temp.jpg");
+        try {
+            file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
+            InputStream is = new ByteArrayInputStream(baos.toByteArray());
+            int x = 0;
+            byte[] b = new byte[1024 * 100];
+            while ((x = is.read(b)) != -1) {
+                fos.write(b, 0, x);
+            }
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
     public String saveImage(String name, Bitmap bmp) {
@@ -249,5 +361,67 @@ public class MessageActivity extends SimpleActivity {
             mFile = Environment.getExternalStorageDirectory() + "/" + "wode/" + "outtemp.png";
         }
         return mFile;
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
+
+    @Override
+    public void showListNews(HeadImage headImage) {
+        Log.e("uuuuuuuu", headImage.getHeadImagePath());
+        Glide.with(this).load(headImage.getHeadImagePath()).into(mImageBighead);
+
+    }
+
+    @Override
+    protected void initEvenAndData() {
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                1);
+
+        Intent intent = getIntent();
+        mPhone = intent.getStringExtra("phone");
+
+
+        Log.e("ppppppppppppp",mPhone);
+    }
+
+    public String BitmaptoString(Bitmap bitmap){
+        //将Bitmap转换成字符串
+        String string=null;
+        ByteArrayOutputStream bStream=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,bStream);
+        byte[]bytes=bStream.toByteArray();
+        string= Base64.encodeToString(bytes,Base64.DEFAULT);
+        return string;
+    }
+
+    @Override
+    protected HeadImagePresenter<HeadImageCon.ListNewsConV> createPresenter() {
+        return new HeadImagePresenter<>();
+    }
+
+    @Override
+    protected View getActivityID() {
+        return mLinearLayout;
+    }
+
+    public String getUserName() {
+        StringBuffer buffer1 = new StringBuffer();
+        int max = 10000000;
+        int min = 99999999;
+        Random random = new Random();
+        mS = random.nextInt(max) % (max - min + 1) + min;
+        buffer1.append("“通航用户");
+        buffer1.append(mS);
+        buffer1.append("”?");
+        return buffer1.toString();
+    }
+
+    private String usernamea() {
+        return "通航用户" + mS;
     }
 }

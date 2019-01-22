@@ -15,7 +15,7 @@ public class ListNewsPresenter<V extends ListNewsCon.ListNewsConV> extends BaseP
     public void getListNews(String json) {
         if (mView != null){
             mView.showProgressbar();
-            mListNewsModlue.getListNews(json,this);
+            mListNewsModlue.getListNewsMod(json,this);
         }
     }
 

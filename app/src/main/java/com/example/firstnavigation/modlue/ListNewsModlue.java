@@ -16,7 +16,7 @@ import com.example.firstnavigation.utils.RxUtils;
 
 public class ListNewsModlue {
 
-    public void getListNews(String json,final ListNewsCon.ListNewsConM listNewsConM){
+    public void getListNewsMod(String json,final ListNewsCon.ListNewsConM listNewsConM){
 
         listNewsConM.setShowProgressbar();
         HttpManager.getHttpManager().getServer().getListNews("news/listNewsChannel", HttpUtils.getBody(json)).compose(RxUtils.<BaseData<ListNews>>rxObserableSchedulerHelper())
