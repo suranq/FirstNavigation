@@ -1,5 +1,6 @@
 package com.example.firstnavigation.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -85,5 +86,6 @@ public class InformationActivity extends SimpleActivity {
 
     @OnClick(R.id.iv_Search)
     public void onViewClicked() {
+        startActivity(new Intent(InformationActivity.this,SearchActivity.class));
     }
 }

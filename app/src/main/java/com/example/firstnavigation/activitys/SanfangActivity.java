@@ -40,7 +40,6 @@ public class SanfangActivity extends SimpleActivity {
 
         Intent intent = getIntent();
         String headimage = intent.getStringExtra("iiiii");
-        Log.e("ttttttt",headimage);
         Glide.with(mContext).load(headimage).into(mIvPortrait);
     }
 

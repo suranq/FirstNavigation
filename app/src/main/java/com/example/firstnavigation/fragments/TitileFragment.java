@@ -2,6 +2,7 @@ package com.example.firstnavigation.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.example.firstnavigation.R;
+import com.example.firstnavigation.activitys.ParticularsActivity;
 import com.example.firstnavigation.adapters.MyInformationAdapter;
 import com.example.firstnavigation.base.fragment.BaseFragment;
 import com.example.firstnavigation.beans.DownList;
@@ -65,6 +67,15 @@ public class TitileFragment extends BaseFragment<DownListCon.DownListConV, DownL
         mMyInformationAdapter = new MyInformationAdapter(mData,getContext());
         mXrlvTitle.setAdapter(mMyInformationAdapter);
         mXrlvTitle.setLoadingListener(this);
+
+        mMyInformationAdapter.setOnItemListener(new MyInformationAdapter.OnItemListener() {
+            @Override
+            public void OnItemListener(DownList.NewListBean newListBean) {
+                Intent intent = new Intent(getContext(), ParticularsActivity.class);
+                intent.putExtra("newsId",newListBean.getNewsId());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -85,7 +96,6 @@ public class TitileFragment extends BaseFragment<DownListCon.DownListConV, DownL
         mJsonDwonList.setCursor("0");
         String toJson = new Gson().toJson(mJsonDwonList);
         mPresenter.getDownList(toJson);
-        super.load();
     }
 
     @Override

@@ -28,6 +28,7 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
     private int ONE = 1;
     private int TWO = 2;
     private int THREE = 3;
+    private OnItemListener mListener;
 
     public MyInformationAdapter(List<DownList.NewListBean> data, Context context) {
 
@@ -81,6 +82,8 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
         myItemSan.mTvwebsite.setText("新华网");
 
         chacha(myItemSan.mIvCha,position);
+
+        skip(myItemSan.itemView,position);
     }
 
     private void getTWO(int position, RecyclerView.ViewHolder holder) {
@@ -94,6 +97,8 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
         myItemSi.mTvwebsite.setText("新华网");
 
         chacha(myItemSi.mIvCha,position);
+
+        skip(myItemSi.itemView,position);
     }
 
     private void getONE(int position, RecyclerView.ViewHolder holder) {
@@ -108,6 +113,19 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
 
         chacha(myTimeTeim.mIvCha,position);
 
+        skip(myTimeTeim.itemView,position);
+
+    }
+
+    private void skip(View itemView, final int position) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null){
+                    mListener.OnItemListener(mData.get(position));
+                }
+            }
+        });
     }
 
     private void chacha(ImageView ivCha, final int position) {
@@ -128,6 +146,7 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
         myTimeText.mTvwebsite.setText("新华网");
         myTimeText.mTvThread.setText(mData.get(position).getPageviews() + "跟帖");
 
+        skip(myTimeText.itemView,position);
     }
 
     @Override
@@ -245,5 +264,13 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
         } else {
             return ZERO;
         }
+    }
+
+    public interface OnItemListener{
+        void OnItemListener(DownList.NewListBean newListBean);
+    }
+
+    public void setOnItemListener(OnItemListener listener){
+        mListener = listener;
     }
 }

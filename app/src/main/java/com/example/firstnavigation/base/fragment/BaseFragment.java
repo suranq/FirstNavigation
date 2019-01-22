@@ -45,8 +45,7 @@ public abstract class BaseFragment<V, P extends BasePresenter<V>> extends Simple
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e("lllljjj",isVisibleToUser+"");
-        if (isVisibleToUser) {
+        if (getUserVisibleHint()) {
             if (mPresenter != null) {
                 load();
             }

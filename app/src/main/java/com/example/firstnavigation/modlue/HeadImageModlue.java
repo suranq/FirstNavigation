@@ -34,8 +34,6 @@ public class HeadImageModlue {
                 .subscribe(new BaseObserver<HeadImage>(listNewsConM) {
                     @Override
                     public void onNext(HeadImage value) {
-
-                        Log.e("litao",value.toString());
                         listNewsConM.setShowListNews(value);
                     }
                 });

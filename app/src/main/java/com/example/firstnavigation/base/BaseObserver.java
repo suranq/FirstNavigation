@@ -68,6 +68,8 @@ public abstract class BaseObserver<T> implements Observer<T> {
             }
         }else if (e instanceof HttpException){
             error = "网络请求错误";
+        }else {
+            error = "其他错误";
         }
         if (sHttpFinishCallbak != null){
             sHttpFinishCallbak.setShowError(error);
