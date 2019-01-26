@@ -1,5 +1,7 @@
 package com.example.firstnavigation.utils;
 
+import android.util.Log;
+
 import java.io.File;
 
 import okhttp3.FormBody;
@@ -18,6 +20,7 @@ public class HttpUtils {
         if (json != null) {
             requestBody = RequestBody.create(MediaType.parse("Content-Type:application/x-www-form-urlencoded,charset-UTF-8"), json);
         }
+
         return requestBody;
     }
 
@@ -50,7 +53,17 @@ public class HttpUtils {
                     .add("newsId", newsId)
                     .build();
         }
+        Log.e("body", body.toString());
         return body;
+    }
+
+    public static RequestBody getCommentList(String json) {
+        RequestBody requestBody = null;
+        if (json != null) {
+            requestBody = RequestBody.create(MediaType.parse("Content-Type:application/x-www-form-urlencoded,charset-UTF-8"), json);
+        }
+        Log.e("评论的body", requestBody.toString());
+        return requestBody;
     }
 
 }

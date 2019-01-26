@@ -2,11 +2,8 @@ package com.example.firstnavigation.presenter;
 
 import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.DownList;
-import com.example.firstnavigation.beans.ListNews;
-import com.example.firstnavigation.contact.DownListCon;
-import com.example.firstnavigation.contact.ListNewsCon;
+import com.example.firstnavigation.contactCon.DownListCon;
 import com.example.firstnavigation.modlue.DownListModlue;
-import com.example.firstnavigation.modlue.ListNewsModlue;
 
 /**
  * Created by 马明祥 on 2019/1/21.

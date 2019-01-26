@@ -15,6 +15,16 @@
     <string name="queren">确认登陆</string>
     <string name="reprint">本文观点不代表第一通航立场，如有转载请联系原作者</string>
     <string name="upload">正在加载...</string>
+    <string name="mypindao">我的频道</string>
+    <string name="drag">长按可拖动排序</string>
+    <string name="Recommend">频道推荐</string>
+    <string name="add">点击添加频道</string>
+    <string name="search">请输入关键字搜索</string>
+    <string name="history">搜索历史</string>
+    <string name="eliminate">清除历史</string>
+    <string name="hot">热门搜索</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

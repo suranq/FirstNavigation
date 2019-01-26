@@ -1,13 +1,9 @@
 package com.example.firstnavigation.modlue;
 
-import android.util.Log;
-
 import com.example.firstnavigation.base.BaseData;
 import com.example.firstnavigation.base.BaseObserver;
 import com.example.firstnavigation.beans.HeadImage;
-import com.example.firstnavigation.beans.ListNews;
-import com.example.firstnavigation.contact.HeadImageCon;
-import com.example.firstnavigation.contact.ListNewsCon;
+import com.example.firstnavigation.contactCon.HeadImageCon;
 import com.example.firstnavigation.https.HttpManager;
 import com.example.firstnavigation.utils.HttpUtils;
 import com.example.firstnavigation.utils.RxUtils;

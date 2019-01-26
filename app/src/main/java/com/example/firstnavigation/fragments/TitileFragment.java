@@ -3,14 +3,11 @@ package com.example.firstnavigation.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.example.firstnavigation.R;
@@ -18,7 +15,7 @@ import com.example.firstnavigation.activitys.ParticularsActivity;
 import com.example.firstnavigation.adapters.MyInformationAdapter;
 import com.example.firstnavigation.base.fragment.BaseFragment;
 import com.example.firstnavigation.beans.DownList;
-import com.example.firstnavigation.contact.DownListCon;
+import com.example.firstnavigation.contactCon.DownListCon;
 import com.example.firstnavigation.json.JsonDwonList;
 import com.example.firstnavigation.presenter.DownListPresenter;
 import com.google.gson.Gson;
@@ -28,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**

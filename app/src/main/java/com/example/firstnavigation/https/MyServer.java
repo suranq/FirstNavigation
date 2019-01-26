@@ -1,11 +1,16 @@
 package com.example.firstnavigation.https;
 
 import com.example.firstnavigation.base.BaseData;
+import com.example.firstnavigation.beans.CommentList;
 import com.example.firstnavigation.beans.DownList;
 import com.example.firstnavigation.beans.HeadImage;
+import com.example.firstnavigation.beans.Hot;
 import com.example.firstnavigation.beans.Info;
 import com.example.firstnavigation.beans.ListNews;
+import com.example.firstnavigation.beans.LoadTopic;
 import com.example.firstnavigation.beans.RelevantNews;
+import com.example.firstnavigation.beans.SearchBean;
+import com.example.firstnavigation.beans.Topic;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -59,4 +64,38 @@ public interface MyServer {
     @Headers("Content-Type:application/x-www-form-urlencoded")
     Observable<BaseData<RelevantNews>> getRelevantNews(@Url String url,@Body RequestBody requestBody);
 
+    /**
+     * 评论列表
+     * */
+    @POST
+    @Headers("Content-Type:application/json")
+    Observable<BaseData<CommentList>>getCommentList(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 热门新闻
+     * */
+    @POST
+    @Headers("Content-Type:application/x-www-form-urlencoded")
+    Observable<BaseData<Hot>>getHot(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 搜索新闻
+     * */
+    @POST
+    @Headers("Content-Type:application/json")
+    Observable<BaseData<SearchBean>>getSearch(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 搜索话题
+     * */
+    @POST
+    @Headers("Content-Type:application/json")
+    Observable<BaseData<Topic>>getTopic(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 话题列表
+     * */
+    @POST
+    @Headers("Content-Type:application/json")
+    Observable<BaseData<LoadTopic>>getLoadTopic(@Url String url,@Body RequestBody requestBody);
 }

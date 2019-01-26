@@ -22,6 +22,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by 马明祥 on 2019/1/18.
@@ -55,6 +56,16 @@ public class HttpManager {
         return retrofit.create(MyServer.class);
     }
 
+    public MyServer getServerList(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Global.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .client(getOkhttpClient())
+                .build();
+        return retrofit.create(MyServer.class);
+    }
+
     private OkHttpClient getOkhttpClient() {
         //缓存文件定义
         Cache cache = new Cache(new File(App.getApp().getCacheDir(), "Cache"), 1024 * 1024 * 10);
@@ -64,10 +75,8 @@ public class HttpManager {
             public void log(String message) {
                 try {
                     String text = URLDecoder.decode(message, "utf-8");
-                    Log.e("OKHttp-----", text);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
-                    Log.e("OKHttp-----", message);
                 }
             }
         });

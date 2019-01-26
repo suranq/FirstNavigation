@@ -25,16 +25,22 @@
             android:id="@+id/iv_tu1"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_0_5"
+            android:layout_marginRight="@dimen/dp_0_5"
             android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/iv_tu2"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_0_5"
+            android:layout_marginRight="@dimen/dp_0_5"
             android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/iv_tu3"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:layout_marginRight="@dimen/dp_0_5"
+            android:layout_marginLeft="@dimen/dp_0_5"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout

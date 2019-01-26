@@ -2,7 +2,7 @@ package com.example.firstnavigation.presenter;
 
 import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.HeadImage;
-import com.example.firstnavigation.contact.HeadImageCon;
+import com.example.firstnavigation.contactCon.HeadImageCon;
 import com.example.firstnavigation.modlue.HeadImageModlue;
 
 import java.util.Map;

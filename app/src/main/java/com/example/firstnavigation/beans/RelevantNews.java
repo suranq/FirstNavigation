@@ -9,13 +9,13 @@ import java.util.List;
 public class RelevantNews {
 
     /**
-     * imageListThumb : ["http://www.ga.cn/uploads/allimg/180513/1_180513100600_1-lp.jpg"]
-     * layoutType : 1
-     * newsId : 659ac8cea0a94416894d6c90f371d2c6
+     * imageListThumb : ["null"]
+     * layoutType : 0
+     * newsId : 5b203a3d58ae47af857684beacfb68e1
      * origin :
-     * pageviews : 17
-     * publishTime : 2018-05-13
-     * title : 2018年全球通用航空竞争情况分析 美国保持领先地位
+     * pageviews : 0
+     * publishTime : 2017-11-16
+     * title : 乌兰县茶卡航空文化 体验中心项目开工建设
      */
 
     private String layoutType;
