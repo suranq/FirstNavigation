@@ -20,7 +20,7 @@ import com.example.firstnavigation.base.activity.BaseActivity;
 import com.example.firstnavigation.beans.CommentList;
 import com.example.firstnavigation.beans.Info;
 import com.example.firstnavigation.beans.RelevantNews;
-import com.example.firstnavigation.contactCon.InfoCon;
+import com.example.firstnavigation.contact.InfoCon;
 import com.example.firstnavigation.json.JsonCommentList;
 import com.example.firstnavigation.presenter.InfoPresenter;
 import com.google.gson.Gson;

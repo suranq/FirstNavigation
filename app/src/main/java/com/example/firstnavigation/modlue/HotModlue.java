@@ -3,7 +3,7 @@ package com.example.firstnavigation.modlue;
 import com.example.firstnavigation.base.BaseData;
 import com.example.firstnavigation.base.BaseObserver;
 import com.example.firstnavigation.beans.Hot;
-import com.example.firstnavigation.contactCon.HotCon;
+import com.example.firstnavigation.contact.HotCon;
 import com.example.firstnavigation.https.HttpManager;
 import com.example.firstnavigation.utils.HttpUtils;
 import com.example.firstnavigation.utils.RxUtils;

@@ -1,4 +1,4 @@
-package com.example.firstnavigation.contactCon;
+package com.example.firstnavigation.contact;
 
 import com.example.firstnavigation.base.BaseModuleHttpFinish;
 import com.example.firstnavigation.base.BaseView;

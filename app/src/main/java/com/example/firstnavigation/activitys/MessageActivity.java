@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.firstnavigation.R;
 import com.example.firstnavigation.base.activity.BaseActivity;
 import com.example.firstnavigation.beans.HeadImage;
-import com.example.firstnavigation.contactCon.HeadImageCon;
+import com.example.firstnavigation.contact.HeadImageCon;
 import com.example.firstnavigation.presenter.HeadImagePresenter;
 import com.example.firstnavigation.shujukuBeans.DataBaseHelep;
 import com.example.firstnavigation.shujukuBeans.Studnet;

@@ -6,6 +6,7 @@ import com.example.firstnavigation.beans.DownList;
 import com.example.firstnavigation.beans.HeadImage;
 import com.example.firstnavigation.beans.Hot;
 import com.example.firstnavigation.beans.Info;
+import com.example.firstnavigation.beans.InfoTopic;
 import com.example.firstnavigation.beans.ListNews;
 import com.example.firstnavigation.beans.LoadTopic;
 import com.example.firstnavigation.beans.RelevantNews;
@@ -98,4 +99,11 @@ public interface MyServer {
     @POST
     @Headers("Content-Type:application/json")
     Observable<BaseData<LoadTopic>>getLoadTopic(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 话题详情
+     * */
+    @POST
+    @Headers("Content-Type:application/x-www-form-urlencoded")
+    Observable<BaseData<InfoTopic>>getInfoTopic(@Url String url,@Body RequestBody requestBody);
 }

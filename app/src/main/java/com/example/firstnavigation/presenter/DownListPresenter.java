@@ -2,7 +2,7 @@ package com.example.firstnavigation.presenter;
 
 import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.DownList;
-import com.example.firstnavigation.contactCon.DownListCon;
+import com.example.firstnavigation.contact.DownListCon;
 import com.example.firstnavigation.modlue.DownListModlue;
 
 /**

@@ -11,7 +11,7 @@ import com.example.firstnavigation.R;
 import com.example.firstnavigation.adapters.MyArticleAdapter;
 import com.example.firstnavigation.base.fragment.BaseFragment;
 import com.example.firstnavigation.beans.SearchBean;
-import com.example.firstnavigation.contactCon.SearchCon;
+import com.example.firstnavigation.contact.SearchCon;
 import com.example.firstnavigation.json.JsonSearch;
 import com.example.firstnavigation.presenter.SearchPresenter;
 import com.google.gson.Gson;

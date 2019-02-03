@@ -15,7 +15,7 @@ import com.example.firstnavigation.activitys.ParticularsActivity;
 import com.example.firstnavigation.adapters.MyInformationAdapter;
 import com.example.firstnavigation.base.fragment.BaseFragment;
 import com.example.firstnavigation.beans.DownList;
-import com.example.firstnavigation.contactCon.DownListCon;
+import com.example.firstnavigation.contact.DownListCon;
 import com.example.firstnavigation.json.JsonDwonList;
 import com.example.firstnavigation.presenter.DownListPresenter;
 import com.google.gson.Gson;

@@ -2,7 +2,7 @@ package com.example.firstnavigation.presenter;
 
 import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.Topic;
-import com.example.firstnavigation.contactCon.TopicCon;
+import com.example.firstnavigation.contact.TopicCon;
 import com.example.firstnavigation.modlue.TopicModlue;
 
 /**

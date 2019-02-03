@@ -7,7 +7,7 @@ import com.example.firstnavigation.base.BaseObserver;
 import com.example.firstnavigation.beans.CommentList;
 import com.example.firstnavigation.beans.Info;
 import com.example.firstnavigation.beans.RelevantNews;
-import com.example.firstnavigation.contactCon.InfoCon;
+import com.example.firstnavigation.contact.InfoCon;
 import com.example.firstnavigation.https.HttpManager;
 import com.example.firstnavigation.utils.HttpUtils;
 import com.example.firstnavigation.utils.RxUtils;

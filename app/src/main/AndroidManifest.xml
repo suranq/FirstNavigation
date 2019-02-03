@@ -106,7 +106,8 @@
         <activity android:name=".activitys.InformationActivity" />
         <activity android:name=".activitys.SearchActivity" />
         <activity android:name=".activitys.ParticularsActivity" />
-        <activity android:name=".activitys.TitleActivity"></activity>
+        <activity android:name=".activitys.TitleActivity" />
+        <activity android:name=".activitys.ParticularsTopicActivity"></activity>
     </application>
 
 </manifest>

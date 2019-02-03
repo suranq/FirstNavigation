@@ -35,6 +35,17 @@ public class HttpUtils {
         return requestBody;
     }
 
+    public static RequestBody getInfoTopic(String topicId,String userId){
+        FormBody body = null;
+        if (topicId != null && userId != null){
+            body = new FormBody.Builder()
+                    .add("topicId",topicId)
+                    .add("userId",userId)
+                    .build();
+        }
+        return body;
+    }
+
     public static RequestBody getBody2(String userId, String newsId) {
         FormBody body = null;
         if (userId != null && newsId != null) {

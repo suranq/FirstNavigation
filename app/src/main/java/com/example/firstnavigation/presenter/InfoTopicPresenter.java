@@ -1,23 +1,21 @@
 package com.example.firstnavigation.presenter;
 
 import com.example.firstnavigation.base.BasePresenter;
-import com.example.firstnavigation.beans.HeadImage;
-import com.example.firstnavigation.contact.HeadImageCon;
-import com.example.firstnavigation.modlue.HeadImageModlue;
-
-import java.util.Map;
+import com.example.firstnavigation.beans.InfoTopic;
+import com.example.firstnavigation.contact.InfoTopicCon;
+import com.example.firstnavigation.modlue.InfoTopicModlue;
 
 /**
- * Created by 马明祥 on 2019/1/20.
+ * Created by 马明祥 on 2019/1/31.
  */
 
-public class HeadImagePresenter<V extends HeadImageCon.ListNewsConV> extends BasePresenter<V> implements HeadImageCon.ListNewsConP, HeadImageCon.ListNewsConM {
-    private HeadImageModlue mHeadImageModlue = new HeadImageModlue();
+public class InfoTopicPresenter<V extends InfoTopicCon.InfoTopicV>extends BasePresenter<InfoTopicCon.InfoTopicV> implements InfoTopicCon.InfoTopicP, InfoTopicCon.InfoTopicM {
+    private InfoTopicModlue mInfoTopicModlue = new InfoTopicModlue();
     @Override
-    public void getHeadImage(Map<String,Object> map) {
+    public void getInfoTopic(String topicId, String userId) {
         if (mView != null){
             mView.showProgressbar();
-            mHeadImageModlue.getUploadHeadImage(map,this);
+            mInfoTopicModlue.getInfoTopic(topicId,userId,this);
         }
     }
 
@@ -44,10 +42,10 @@ public class HeadImagePresenter<V extends HeadImageCon.ListNewsConV> extends Bas
     }
 
     @Override
-    public void setShowListNews(HeadImage headImage) {
+    public void setShowInfoTopic(InfoTopic infoTopic) {
         if (mView != null){
             mView.hideProgressbar();
-            mView.showListNews(headImage);
+            mView.showInfoTopic(infoTopic);
         }
     }
 }

@@ -20,7 +20,7 @@ import com.example.firstnavigation.adapters.MyHotAdapter;
 import com.example.firstnavigation.adapters.MySearchAdapter;
 import com.example.firstnavigation.base.activity.BaseActivity;
 import com.example.firstnavigation.beans.Hot;
-import com.example.firstnavigation.contactCon.HotCon;
+import com.example.firstnavigation.contact.HotCon;
 import com.example.firstnavigation.fragments.ArticleFragment;
 import com.example.firstnavigation.fragments.HuatiFragment;
 import com.example.firstnavigation.presenter.HotPresenter;

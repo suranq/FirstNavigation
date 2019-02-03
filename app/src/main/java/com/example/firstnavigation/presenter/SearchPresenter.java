@@ -2,7 +2,7 @@ package com.example.firstnavigation.presenter;
 
 import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.SearchBean;
-import com.example.firstnavigation.contactCon.SearchCon;
+import com.example.firstnavigation.contact.SearchCon;
 import com.example.firstnavigation.modlue.SearchModlue;
 
 /**

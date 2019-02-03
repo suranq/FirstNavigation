@@ -6,7 +6,7 @@ import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.CommentList;
 import com.example.firstnavigation.beans.Info;
 import com.example.firstnavigation.beans.RelevantNews;
-import com.example.firstnavigation.contactCon.InfoCon;
+import com.example.firstnavigation.contact.InfoCon;
 import com.example.firstnavigation.modlue.InfoModlue;
 
 /**
