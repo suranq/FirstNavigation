@@ -4,8 +4,10 @@ import android.util.Log;
 
 import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.CommentList;
+import com.example.firstnavigation.beans.Favourite;
 import com.example.firstnavigation.beans.Info;
 import com.example.firstnavigation.beans.RelevantNews;
+import com.example.firstnavigation.beans.TopicComment;
 import com.example.firstnavigation.contact.InfoCon;
 import com.example.firstnavigation.modlue.InfoModlue;
 
@@ -27,7 +29,6 @@ public class InfoPresenter<V extends InfoCon.InfoConV> extends BasePresenter<V> 
     public void getRelevantNews(String newsId) {
         if (mView != null){
             mView.showProgressbar();
-            Log.e("有了吗有了吗",newsId);
             mInfoModlue.getRelevantNews(newsId,this);
         }
     }
@@ -37,6 +38,22 @@ public class InfoPresenter<V extends InfoCon.InfoConV> extends BasePresenter<V> 
         if (mView != null){
             mView.showProgressbar();
             mInfoModlue.getCommentList(json,this);
+        }
+    }
+
+    @Override
+    public void getFavourite(String json) {
+        if (mView != null){
+            mView.showProgressbar();
+            mInfoModlue.getFavourite(json,this);
+        }
+    }
+
+    @Override
+    public void getTopicComment(String json) {
+        if (mView != null){
+            mView.showProgressbar();
+            mInfoModlue.getTopicComment(json,this);
         }
     }
 
@@ -74,7 +91,6 @@ public class InfoPresenter<V extends InfoCon.InfoConV> extends BasePresenter<V> 
     public void setShowRelevantNews(RelevantNews relevantNews) {
         if (mView != null){
             mView.hideProgressbar();
-            Log.e("有了吗有了吗",relevantNews.getTitle());
             mView.showRelevantNews(relevantNews);
         }
     }
@@ -84,6 +100,22 @@ public class InfoPresenter<V extends InfoCon.InfoConV> extends BasePresenter<V> 
         if (mView != null){
             mView.hideProgressbar();
             mView.showCommentList(commentList);
+        }
+    }
+
+    @Override
+    public void setShowFavourite(Favourite favourite) {
+        if (mView != null){
+            mView.hideProgressbar();
+            mView.showFavourite(favourite);
+        }
+    }
+
+    @Override
+    public void setShowTopicComment(TopicComment topicComment) {
+        if (mView != null){
+            mView.hideProgressbar();
+            mView.showTopicComment(topicComment);
         }
     }
 }

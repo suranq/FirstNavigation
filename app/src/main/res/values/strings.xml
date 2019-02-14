@@ -25,6 +25,22 @@
     <string name="hot">热门搜索</string>
     <string name="share">点击链接查看分享内容</string>
     <string name="impor">我有话要说</string>
+    <string name="publish">发表话题</string>
+    <string name="select">选择话题标签</string>
+    <string name="label">(合适的标签可以让更多的读者参与)</string>
+    <string name="content">输入话题内容</string>
+    <string name="custom">自定义标签</string>
+    <string name="suoxuan">所选标签</string>
+    <string name="tianjia">可选9张图片</string>
+    <string name="name">登陆/注册</string>
+    <string name="denglu">1秒登陆体验更多</string>
+    <string name="xinxi">点击编辑个人信息</string>
+    <string name="wifi">仅限WiFi网络下载图片</string>
+    <string name="bianji">编辑个人信息</string>
+    <string name="gengduo">关注更多通航号</string>
+    <string name="zuiduo">评论内容最多150字</string>
+    <string name="zhankai">展开更多最新评论</string>
+    <string name="pinglun">展开更多最新点赞</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

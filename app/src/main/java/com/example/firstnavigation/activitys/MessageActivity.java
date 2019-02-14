@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.firstnavigation.R;
+import com.example.firstnavigation.activitys.information.InformationActivity;
 import com.example.firstnavigation.base.activity.BaseActivity;
 import com.example.firstnavigation.beans.HeadImage;
 import com.example.firstnavigation.contact.HeadImageCon;
@@ -86,7 +87,15 @@ public class MessageActivity extends BaseActivity<HeadImageCon.ListNewsConV, Hea
 
     @Override
     protected void initData() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                1);
 
+        Intent intent = getIntent();
+        mPhone = intent.getStringExtra("phone");
+
+
+        Log.e("ppppppppppppp",mPhone);
     }
 
     @Override
@@ -368,19 +377,6 @@ public class MessageActivity extends BaseActivity<HeadImageCon.ListNewsConV, Hea
 
     }
 
-    @Override
-    protected void initEvenAndData() {
-
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
-                1);
-
-        Intent intent = getIntent();
-        mPhone = intent.getStringExtra("phone");
-
-
-        Log.e("ppppppppppppp",mPhone);
-    }
 
     public String BitmaptoString(Bitmap bitmap){
         //将Bitmap转换成字符串

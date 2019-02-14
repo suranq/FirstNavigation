@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/linear"
     android:orientation="vertical"
-    tools:context="com.example.firstnavigation.fragments.ChoicenessFragment">
+    tools:context="com.example.firstnavigation.fragments.topic.ChoicenessFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView

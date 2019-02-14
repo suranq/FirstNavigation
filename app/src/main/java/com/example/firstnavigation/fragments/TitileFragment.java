@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.firstnavigation.R;
-import com.example.firstnavigation.activitys.ParticularsActivity;
-import com.example.firstnavigation.adapters.MyInformationAdapter;
+import com.example.firstnavigation.activitys.information.ParticularsActivity;
+import com.example.firstnavigation.adapters.information.MyInformationAdapter;
 import com.example.firstnavigation.base.fragment.BaseFragment;
 import com.example.firstnavigation.beans.DownList;
 import com.example.firstnavigation.contact.DownListCon;
@@ -96,7 +96,6 @@ public class TitileFragment extends BaseFragment<DownListCon.DownListConV, DownL
 
     @Override
     public void showDownList(DownList downList) {
-        Log.e("zzzzzzz", downList.getNewList().get(0).getTitle());
         mDownList = downList;
         mMyInformationAdapter.setData(downList.getNewList());
     }

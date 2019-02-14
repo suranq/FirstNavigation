@@ -121,7 +121,8 @@ dependencies {
     implementation files('libs/umeng-analytics-8.0.0.jar')
     implementation files('libs/umeng-common-2.0.1.jar')
     implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
-
     compile 'org.jsoup:jsoup:1.10.2'
+    compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
+    compile 'q.rorbin:VerticalTabLayout:1.2.5'
 
 }

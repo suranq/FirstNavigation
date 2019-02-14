@@ -30,7 +30,7 @@ public abstract class BaseActivity<V,P extends BasePresenter<V>> extends SimpleA
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         ViewGroup view = (ViewGroup) LayoutInflater.from(this).inflate(createLayoutId(), null);
         setContentView(view);
         mUnbinder = ButterKnife.bind(this, view);
@@ -39,11 +39,10 @@ public abstract class BaseActivity<V,P extends BasePresenter<V>> extends SimpleA
         if (mPresenter != null){
             mPresenter.attachView((V) this);
         }
-        initEvenAndData();
         showWindow();
-    }
 
-    protected abstract void initEvenAndData();
+        super.onCreate(savedInstanceState);
+    }
 
     protected abstract P createPresenter();
 

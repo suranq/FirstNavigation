@@ -103,11 +103,23 @@
         <!-- &lt;!&ndash;value的值填写渠道名称，例如yingyongbao。这里设置动态渠道名称变量&ndash;&gt; -->
         <!-- <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/> -->
         <activity android:name=".activitys.SanfangActivity" />
-        <activity android:name=".activitys.InformationActivity" />
-        <activity android:name=".activitys.SearchActivity" />
-        <activity android:name=".activitys.ParticularsActivity" />
-        <activity android:name=".activitys.TitleActivity" />
-        <activity android:name=".activitys.ParticularsTopicActivity"></activity>
+        <activity android:name=".activitys.information.InformationActivity" />
+        <activity android:name=".activitys.information.SearchActivity" />
+        <activity android:name=".activitys.information.ParticularsActivity" />
+        <activity android:name=".activitys.information.TitleActivity" />
+        <activity android:name=".activitys.topic.ParticularsTopicActivity" />
+        <activity android:name=".activitys.topic.PublishActivity" />
+        <activity android:name=".activitys.topic.LabelActivity" />
+        <activity android:name=".activitys.user.ModificationActivity" />
+        <activity android:name=".activitys.user.GeRenActivity" />
+        <activity android:name=".activitys.user.CollectActivity" />
+        <activity android:name=".activitys.user.AttentionActivity" />
+        <activity android:name=".activitys.user.ProfessionActivity" />
+        <activity android:name=".activitys.user.SearchTopicActivity" />
+        <activity android:name=".activitys.user.ListCommentActivity" />
+        <activity android:name=".activitys.user.InformActivity" />
+        <activity android:name=".activitys.user.MoreActivity" />
+        <activity android:name=".activitys.user.MoreAttenActivity"></activity>
     </application>
 
 </manifest>

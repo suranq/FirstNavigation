@@ -56,16 +56,6 @@ public class HttpManager {
         return retrofit.create(MyServer.class);
     }
 
-    public MyServer getServerList(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Global.BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .client(getOkhttpClient())
-                .build();
-        return retrofit.create(MyServer.class);
-    }
-
     private OkHttpClient getOkhttpClient() {
         //缓存文件定义
         Cache cache = new Cache(new File(App.getApp().getCacheDir(), "Cache"), 1024 * 1024 * 10);

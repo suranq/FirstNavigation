@@ -12,12 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.firstnavigation.activitys.InformationActivity;
+import com.example.firstnavigation.activitys.information.InformationActivity;
 import com.example.firstnavigation.activitys.MessageActivity;
 import com.example.firstnavigation.activitys.SanfangActivity;
 import com.example.firstnavigation.base.activity.SimpleActivity;
 import com.example.firstnavigation.shujukuBeans.DataBaseHelep;
 import com.example.firstnavigation.shujukuBeans.Studnet;
+import com.example.firstnavigation.utils.TimeUtils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -68,6 +69,7 @@ public class MainActivity extends SimpleActivity {
 
     @Override
     protected void initData() {
+
         mInsh = DataBaseHelep.getInsh();
         mBtLogin.setClickable(false);
         mEtPhone.addTextChangedListener(new TextWatcher() {

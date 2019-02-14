@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/linear"
-    tools:context="com.example.firstnavigation.fragments.TopicxiaoFragment">
+    tools:context="com.example.firstnavigation.fragments.topic.TopicxiaoFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

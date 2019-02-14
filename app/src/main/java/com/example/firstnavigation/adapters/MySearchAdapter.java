@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.firstnavigation.R;
-import com.example.firstnavigation.activitys.SearchActivity;
+import com.example.firstnavigation.activitys.information.SearchActivity;
 import com.example.firstnavigation.shujukuBeans.Search;
 
 import java.util.List;

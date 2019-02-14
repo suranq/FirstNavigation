@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_user_head"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:src="@mipmap/topic_keyboard"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_userName"
+                android:text="@string/impor"
+                android:textSize="@dimen/dp_14"
+                android:textColor="@color/colorBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_marginTop="@dimen/dp_7_5"
+                android:text="@string/impor"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/dianzan"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_like"
+                android:text="@string/impor"
+                android:textSize="@dimen/dp_12"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_marginTop="@dimen/dp_7_5"
+        android:textSize="@dimen/dp_18"
+        android:textColor="@color/colorBlack"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:text="@string/impor"
+        android:layout_marginLeft="@dimen/dp_72"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

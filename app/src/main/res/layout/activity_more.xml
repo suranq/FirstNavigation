@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/linearmore"
+    tools:context="com.example.firstnavigation.activitys.user.MoreActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/search_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorRed"
+        android:minHeight="?android:actionBarSize">
+
+        <ImageView
+            android:id="@+id/iv_fan"
+            android:src="@mipmap/fan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="@dimen/dp_270"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:background="@drawable/tool"
+            android:cursorVisible="true"
+            android:drawableLeft="@mipmap/search"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="请输入关键词搜索"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/colorBlack"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/search_text_quxiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="取消"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_width="@dimen/dp_300"
+            android:layout_height="@dimen/dp_55">
+            <TextView
+                android:id="@+id/search_qingkong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorBlack"
+                android:text="清空"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/linear_more"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <q.rorbin.verticaltablayout.VerticalTabLayout
+                android:id="@+id/tab"
+                app:tab_mode="scrollable"
+                app:tab_margin="@dimen/dp_40"
+                app:indicator_color="@color/colorWhite"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:background="@color/colorGray"
+                android:layout_width="@dimen/dp_1"
+                android:layout_height="match_parent" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_shousuo"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+</LinearLayout>

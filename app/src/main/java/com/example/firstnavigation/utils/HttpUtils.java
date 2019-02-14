@@ -3,6 +3,7 @@ package com.example.firstnavigation.utils;
 import android.util.Log;
 
 import java.io.File;
+import java.util.List;
 
 import okhttp3.FormBody;
 import okhttp3.MediaType;
@@ -18,9 +19,8 @@ public class HttpUtils {
     public static RequestBody getBody(String json) {
         RequestBody requestBody = null;
         if (json != null) {
-            requestBody = RequestBody.create(MediaType.parse("Content-Type:application/x-www-form-urlencoded,charset-UTF-8"), json);
+            requestBody = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded,charset-UTF-8"), json);
         }
-
         return requestBody;
     }
 
@@ -40,6 +40,27 @@ public class HttpUtils {
         if (topicId != null && userId != null){
             body = new FormBody.Builder()
                     .add("topicId",topicId)
+                    .add("userId",userId)
+                    .build();
+        }
+        return body;
+    }
+
+    public static RequestBody getCollect(String userId,String cursor){
+        FormBody body = null;
+        if (userId != null && cursor != null){
+            body = new FormBody.Builder()
+                    .add("userId",userId)
+                    .add("cursor",cursor)
+                    .build();
+        }
+        return body;
+    }
+
+    public static RequestBody getCenter(String userId){
+        FormBody body = null;
+        if (userId != null){
+            body = new FormBody.Builder()
                     .add("userId",userId)
                     .build();
         }
@@ -74,6 +95,24 @@ public class HttpUtils {
             requestBody = RequestBody.create(MediaType.parse("Content-Type:application/x-www-form-urlencoded,charset-UTF-8"), json);
         }
         Log.e("评论的body", requestBody.toString());
+        return requestBody;
+    }
+
+    public static RequestBody getInserTpoic(String userId, String title, String tagList, List<String> fileList,String shareLink){
+        RequestBody requestBody = null;
+        int position = 0;
+        for (int i = 0; i < fileList.size(); i++) {
+            position = i;
+        }
+        if (userId != null && tagList != null && title != null && shareLink != null){
+            requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                    .addFormDataPart("userId",userId)
+                    .addFormDataPart("title",title)
+                    .addFormDataPart("tagList",tagList)
+                    .addFormDataPart("fileList",fileList.get(position))
+                    .addFormDataPart("shareLink",shareLink)
+                    .build();
+        }
         return requestBody;
     }
 
