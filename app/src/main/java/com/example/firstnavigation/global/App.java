@@ -2,6 +2,7 @@ package com.example.firstnavigation.global;
 
 import android.app.Application;
 
+import com.example.firstnavigation.typeface.PreferencesHelper;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
@@ -11,14 +12,18 @@ import com.umeng.socialize.PlatformConfig;
  */
 
 public class App extends Application {
-
+    private PreferencesHelper ph;
     private static App sApp;
 
+    // 单例模式获取唯一的Application实例
+    public static Application getInstance() {
+        return sApp.getApplication();
+    }
     @Override
     public void onCreate() {
         super.onCreate();
         sApp = this;
-
+        ph = new PreferencesHelper(getApplication(), "test");
         UMConfigure.setLogEnabled(true);
         UMConfigure.init(this, "5b248738a40fa37c010000a3", "MyYouMeng", UMConfigure.DEVICE_TYPE_PHONE, "");
         PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
@@ -38,5 +43,22 @@ public class App extends Application {
 
     public static App getApp() {
         return sApp;
+    }
+
+    private Application getApplication(){
+        return  this;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return ph;
+    }
+
+    /**
+     *
+     * @return 获取字体缩放比例
+     */
+    public float getFontScale(){
+        int currentIndex= ph.getValueInt("currentIndex",1);
+        return 1+currentIndex*0.1f;
     }
 }

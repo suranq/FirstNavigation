@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.firstnavigation.R;
 import com.example.firstnavigation.beans.LoadTopic;
 import com.example.firstnavigation.beans.Topic;
+import com.example.firstnavigation.utils.SystemUtil;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by 马明祥 on 2019/1/25.
  */
 
-public class MyTopicAdapter extends XRecyclerView.Adapter{
+public class MyTopicAdapter extends XRecyclerView.Adapter {
     private List<Topic.TopicListBean> mData;
     private final Context mContext;
     private OnItemListener mListener;
@@ -64,8 +65,10 @@ public class MyTopicAdapter extends XRecyclerView.Adapter{
             holder1.mTvLike.setText(mData.get(position).getLikes() + "");
             holder1.mTvComment.setText(mData.get(position).getComments() + "");
             holder1.mTvRead.setText(mData.get(position).getPageviews() + "");
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder1.mIvTu);
-            getOnItem(holder1,position);
+            if (SystemUtil.isOpen()) {
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder1.mIvTu);
+            }
+            getOnItem(holder1, position);
         } else if (itemViewType == 2) {
             MyViewHolder2 holder2 = (MyViewHolder2) holder;
             RequestOptions requestOptions = new RequestOptions().circleCrop();
@@ -76,9 +79,11 @@ public class MyTopicAdapter extends XRecyclerView.Adapter{
             holder2.mTvLike.setText(mData.get(position).getLikes() + "");
             holder2.mTvComment.setText(mData.get(position).getComments() + "");
             holder2.mTvRead.setText(mData.get(position).getPageviews() + "");
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder2.mIvTu1);
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder2.mIvTu2);
-            getOnItem(holder2,position);
+            if (SystemUtil.isOpen()) {
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder2.mIvTu1);
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder2.mIvTu2);
+            }
+            getOnItem(holder2, position);
         } else if (itemViewType == 3) {
             MyViewHolder3 holder3 = (MyViewHolder3) holder;
             RequestOptions requestOptions = new RequestOptions().circleCrop();
@@ -89,10 +94,12 @@ public class MyTopicAdapter extends XRecyclerView.Adapter{
             holder3.mTvLike.setText(mData.get(position).getLikes() + "");
             holder3.mTvComment.setText(mData.get(position).getComments() + "");
             holder3.mTvRead.setText(mData.get(position).getPageviews() + "");
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder3.mIvTu1);
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder3.mIvTu2);
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(2)).into(holder3.mIvTu3);
-            getOnItem(holder3,position);
+            if (SystemUtil.isOpen()) {
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder3.mIvTu1);
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder3.mIvTu2);
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(2)).into(holder3.mIvTu3);
+            }
+            getOnItem(holder3, position);
         } else {
             MyViewHolder4 holder4 = (MyViewHolder4) holder;
             RequestOptions requestOptions = new RequestOptions().circleCrop();
@@ -104,7 +111,7 @@ public class MyTopicAdapter extends XRecyclerView.Adapter{
             holder4.mTvComment.setText(mData.get(position).getComments() + "");
             holder4.mTvRead.setText(mData.get(position).getPageviews() + "");
             holder4.mTvShare.setText(mData.get(position).getShareLink());
-            getOnItem(holder4,position);
+            getOnItem(holder4, position);
         }
     }
 
@@ -112,7 +119,7 @@ public class MyTopicAdapter extends XRecyclerView.Adapter{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener != null){
+                if (mListener != null) {
                     mListener.OnItemListener(mData.get(position));
                 }
             }
@@ -247,16 +254,16 @@ public class MyTopicAdapter extends XRecyclerView.Adapter{
             } else {
                 return 4;
             }
-        }else {
+        } else {
             return 4;
         }
     }
 
-    public interface OnItemListener{
+    public interface OnItemListener {
         void OnItemListener(Topic.TopicListBean topicListBean);
     }
 
-    public void setOnItemListener(OnItemListener listener){
+    public void setOnItemListener(OnItemListener listener) {
         mListener = listener;
     }
 }

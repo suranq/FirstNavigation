@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tv_search"
-        android:textSize="@dimen/dp_20"
+        android:textSize="@dimen/sp_20"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginLeft="@dimen/dp_20"

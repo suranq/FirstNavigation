@@ -1,5 +1,6 @@
 package com.example.firstnavigation.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,10 +19,10 @@ import java.util.List;
  */
 
 public class MyImageAdapter extends RecyclerView.Adapter{
-    private final List<String> mImageListThumb;
-    private final CollectActivity mCollectActivity;
+    private List<String> mImageListThumb;
+    private Context mCollectActivity;
 
-    public MyImageAdapter(List<String> imageListThumb, CollectActivity collectActivity) {
+    public MyImageAdapter(List<String> imageListThumb, Context collectActivity) {
 
         mImageListThumb = imageListThumb;
         mCollectActivity = collectActivity;

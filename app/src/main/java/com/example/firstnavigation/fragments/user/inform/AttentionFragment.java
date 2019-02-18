@@ -55,6 +55,15 @@ public class AttentionFragment extends SimpleFragment {
 
                 int width = getResources().getDimensionPixelOffset(R.dimen.dp_100);
                 int height = ViewGroup.LayoutParams.MATCH_PARENT;
+
+                SwipeMenuItem zhiding = new SwipeMenuItem(getContext())
+                        .setBackground(R.color.colorYellow)
+                        .setText("置顶")
+                        .setTextColor(Color.WHITE)
+                        .setWidth(width)
+                        .setHeight(height);
+                rightMenu.addMenuItem(zhiding);
+
                 // 注意：哪边不想要菜单，那么不要添加即可。
                 SwipeMenuItem addItem = new SwipeMenuItem(getContext())
                         .setBackground(R.color.colorRed)
@@ -80,6 +89,24 @@ public class AttentionFragment extends SimpleFragment {
                 Toast.makeText(getContext(), direction + " " + adapterPosition + " " + menuPosition, Toast.LENGTH_SHORT).show();
             }
         };
+
+        mRlvAttention.setSwipeMenuCreator(mSwipeMenuCreator);
+
+        //设置侧滑菜单的点击事件
+        mRlvAttention.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+            @Override
+            public void onItemClick(SwipeMenuBridge menuBridge) {
+                menuBridge.closeMenu();
+                int direction = menuBridge.getDirection(); // 左侧还是右侧菜单。0是左，右是1，暂时没有用到
+                int adapterPosition = menuBridge.getAdapterPosition(); // RecyclerView的Item的position。
+                int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
+                ListNotify.DataBean dataBean = mData.get(adapterPosition);
+                mData.add(0,dataBean);
+                mData.remove(dataBean);
+                mMyAttentionAdapter = new MyAttentionAdapter(mData, getContext());
+                mRlvAttention.setAdapter(mMyAttentionAdapter);
+            }
+        });
 
         //设置侧滑菜单的点击事件
         mRlvAttention.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {

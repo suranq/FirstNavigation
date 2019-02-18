@@ -3,7 +3,7 @@ package com.example.firstnavigation.contact;
 import com.example.firstnavigation.base.BaseModuleHttpFinish;
 import com.example.firstnavigation.base.BaseView;
 import com.example.firstnavigation.beans.InsertTopic;
-import com.example.firstnavigation.json.JsonInsertTopic;
+import com.example.firstnavigation.beans.ToTopic;
 
 /**
  * Created by 马明祥 on 2019/2/7.
@@ -15,7 +15,7 @@ public interface InsertTopicCon {
     }
 
     interface InsertTopicP{
-        void getInsertTopic(JsonInsertTopic jsonInsertTopic);
+        void getInsertTopic(ToTopic toTopic);
     }
 
     interface InsertTopicM extends BaseModuleHttpFinish{

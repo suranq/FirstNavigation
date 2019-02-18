@@ -8,18 +8,24 @@ import android.net.NetworkInfo;
 import android.text.TextUtils;
 
 import com.example.firstnavigation.global.App;
+import com.example.firstnavigation.shujukuBeans.Wifi;
+import com.example.firstnavigation.shujukuBeans.WifiHelep;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * Created by 马明祥 on 2019/1/18.
  */
 
 public class SystemUtil {
+
+    private static Wifi mWifi;
+
     /**
      * 检查WIFI是否连接
      */
@@ -28,6 +34,17 @@ public class SystemUtil {
         NetworkInfo wifiInfo = connectivityManager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return wifiInfo != null;
+    }
+
+    /**
+     * 检查wifi是否处开连接状态
+     *
+     * @return
+     */
+    public static boolean isWifiConnect() {
+        ConnectivityManager connManager = (ConnectivityManager) App.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifiInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        return mWifiInfo.isConnected();
     }
 
     /**
@@ -133,6 +150,24 @@ public class SystemUtil {
     public static int px2dp(float pxValue) {
         final float scale = App.getApp().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static boolean isOpen(){
+        List<Wifi> wifis = WifiHelep.getInsh().selectAll();
+        boolean isopen;
+        for (int i = 0; i < wifis.size(); i++) {
+            mWifi = wifis.get(i);
+        }
+        if (mWifi.getIsOpen()){
+            if (isWifiConnect()){
+                isopen = true;
+            }else {
+                isopen = false;
+            }
+        }else {
+            isopen = true;
+        }
+        return isopen;
     }
 
     /**

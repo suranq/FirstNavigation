@@ -163,7 +163,7 @@ public class ParticularsActivity extends BaseActivity<InfoCon.InfoConV, InfoPres
     public void showInfo(Info info) {
         mInfo = info;
         mTvTitle.setText(mInfo.getTitle());
-        mTvTime.setText(TimeUtils.getDifference(mInfo.getPublishTime()));
+        mTvTime.setText(TimeUtils.gettime(mInfo.getPublishTime()));
         mTvSource.setText("阿鑫之家");
         if (info.getIsFavoured()==0){
             mIvNewsLike.setSelected(false);

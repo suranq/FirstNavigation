@@ -45,7 +45,7 @@ public class MyLikeAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder holder1 = (ViewHolder) holder;
         RequestOptions requestOptions = new RequestOptions().circleCrop();
-        Glide.with(mContext).load(mData.get(position).getHeadImagePath()).into(holder1.mIvUserHead);
+        Glide.with(mContext).load(mData.get(position).getHeadImagePath()).apply(requestOptions).into(holder1.mIvUserHead);
         holder1.mTvUserName.setText(mData.get(position).getNickname());
         holder1.mTvTime.setText(TimeUtils.getDifference(mData.get(position).getNotifyTime()));
         holder1.mTvTitle.setText(mData.get(position).getFromTitle());

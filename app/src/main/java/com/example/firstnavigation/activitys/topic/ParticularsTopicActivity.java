@@ -1,7 +1,6 @@
 package com.example.firstnavigation.activitys.topic;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.firstnavigation.R;
@@ -41,13 +38,9 @@ import com.example.firstnavigation.json.JsonTopicComment;
 import com.example.firstnavigation.presenter.InfoTopicPresenter;
 import com.example.firstnavigation.utils.TimeUtils;
 import com.google.gson.Gson;
-
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 public class ParticularsTopicActivity extends BaseActivity<InfoTopicCon.InfoTopicV, InfoTopicPresenter<InfoTopicCon.InfoTopicV>> implements InfoTopicCon.InfoTopicV {
 
     @BindView(R.id.linear)
@@ -169,15 +162,14 @@ public class ParticularsTopicActivity extends BaseActivity<InfoTopicCon.InfoTopi
 
         mTopicId = infoTopic.getTopicId();
         mUserId = infoTopic.getUserId();
-
+        Log.e("uuuuuu",mUserId);
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(ParticularsTopicActivity.this).load(mInfoTopic.getHeadImagePath()).apply(requestOptions).into(mIvUserHead);
         mTvUserName.setText(mInfoTopic.getNickname());
-        mTvTime.setText(TimeUtils.getDifference(mInfoTopic.getPublishTime()));
+        mTvTime.setText(TimeUtils.gettime(mInfoTopic.getPublishTime()));
         mTvTitle.setText(mInfoTopic.getTitle());
         mTvStrip.setText("热门评论" + infoTopic.getComments() + "条");
         mTvLike.setText(infoTopic.getLikes()+"");
-        Log.e("dianzanzan",infoTopic.getIsLiked()+"");
 
         if (infoTopic.getIsLiked() == 0) {
             mIvLike.setSelected(false);
@@ -225,10 +217,10 @@ public class ParticularsTopicActivity extends BaseActivity<InfoTopicCon.InfoTopi
 
     @Override
     public void showLike(Like like) {
-        Log.e("dddddd",like.getMessage());
+
     }
 
-    @OnClick({R.id.iv_menu, R.id.tv_like, R.id.iv_like, R.id.fenxiang, R.id.pinglun, R.id.ivShoucang, R.id.bt_guanzhu})
+    @OnClick({R.id.iv_menu, R.id.tv_like, R.id.iv_like, R.id.fenxiang, R.id.pinglun, R.id.ivShoucang, R.id.bt_guanzhu,R.id.iv_user_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_menu:
@@ -267,6 +259,11 @@ public class ParticularsTopicActivity extends BaseActivity<InfoTopicCon.InfoTopi
                     mBtGuanzhu.setText("关注");
                     quxiao();
                 }
+                break;
+            case R.id.iv_user_head:
+                Intent intent = new Intent(ParticularsTopicActivity.this, HomePageActivity.class);
+                intent.putExtra("lookUserId",mUserId);
+                startActivity(intent);
                 break;
         }
     }
@@ -343,7 +340,7 @@ public class ParticularsTopicActivity extends BaseActivity<InfoTopicCon.InfoTopi
                 jsonTopicComment.setObjectType("1");
                 mPresenter.getTopicComment(new Gson().toJson(jsonTopicComment));
                 getComment();
-                mMyDiscussAdapter.notifyDataSetChanged();
+                mRlvDiscuss.setAdapter(mMyDiscussAdapter);
                 mLinear.setBackgroundColor(0xFFFFFFFF);
                 popupWindow.dismiss();
 

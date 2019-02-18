@@ -3,34 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/ed_nicheng"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入昵称" />
-
     <LinearLayout
+        android:id="@+id/xiaoxi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/bt_quxiao"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_issue"
+            android:text="消息通知"
+            android:layout_marginTop="@dimen/dp_17"
+            android:layout_marginBottom="@dimen/dp_17"
+            android:textSize="@dimen/sp_17"
+            android:layout_marginLeft="@dimen/dp_27"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="取消" />
-
+            android:layout_height="wrap_content" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/bt_que"
-                android:text="确定"
+            <ImageView
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_17"
+                android:src="@mipmap/jump"
+                android:layout_marginTop="@dimen/dp_17"
+                android:layout_marginBottom="@dimen/dp_17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

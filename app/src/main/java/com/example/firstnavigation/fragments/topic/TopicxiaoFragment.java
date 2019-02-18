@@ -30,7 +30,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopicxiaoFragment extends BaseFragment<LoadTopicCon.LoadTopicV, LoadTopicPresenter<LoadTopicCon.LoadTopicV>> implements LoadTopicCon.LoadTopicV, XRecyclerView.LoadingListener {
+public class TopicxiaoFragment extends BaseFragment<LoadTopicCon.LoadTopicV, LoadTopicPresenter<LoadTopicCon.LoadTopicV>> implements LoadTopicCon.LoadTopicV, XRecyclerView.LoadingListener, PublishActivity.OnItemListener {
 
 
     @BindView(R.id.iv_publish)
@@ -74,6 +74,8 @@ public class TopicxiaoFragment extends BaseFragment<LoadTopicCon.LoadTopicV, Loa
             }
         });
 
+        PublishActivity.setOnItemListener(this);
+
     }
 
     @Override
@@ -112,7 +114,7 @@ public class TopicxiaoFragment extends BaseFragment<LoadTopicCon.LoadTopicV, Loa
     public void onRefresh() {
         mJsonLoadTopic.setUserId("efe7538b97f14d11952f5a13e1c7f7cd");
         mJsonLoadTopic.setType("0");
-        mJsonLoadTopic.setCursor("0");
+        mJsonLoadTopic.setCursor(mCursor);
         mJsonLoadTopic.setTagId("0");
         mPresenter.getLoadTopic(new Gson().toJson(mJsonLoadTopic));
         mXrlvTopic.refreshComplete();
@@ -126,5 +128,15 @@ public class TopicxiaoFragment extends BaseFragment<LoadTopicCon.LoadTopicV, Loa
         mJsonLoadTopic.setTagId("0");
         mPresenter.getLoadTopic(new Gson().toJson(mJsonLoadTopic));
         mXrlvTopic.loadMoreComplete();
+    }
+
+    @Override
+    public void OnItemListener() {
+        mJsonLoadTopic.setUserId("efe7538b97f14d11952f5a13e1c7f7cd");
+        mJsonLoadTopic.setType("0");
+        mJsonLoadTopic.setCursor(mCursor);
+        mJsonLoadTopic.setTagId("0");
+        mPresenter.getLoadTopic(new Gson().toJson(mJsonLoadTopic));
+        mXrlvTopic.setAdapter(mMyLoadTopicAdapter);
     }
 }

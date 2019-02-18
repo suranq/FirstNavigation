@@ -56,9 +56,8 @@ public class LabelActivity extends BaseActivity<TagsHotCon.TagsHotV, TagsHotPres
     public List<Label> mLabels = new ArrayList<>();
     public MyLabelAdapter mMyLabelAdapter;
     private LabelHelep mInsh;
-    public static MyPitchAdapter mMyPitchAdapter;
-    private OnItemListener mListener;
-    private boolean isShow = false;
+    public MyPitchAdapter mMyPitchAdapter;
+    private static OnItemListener mListener;
 
     @Override
     protected int getActivityColor() {
@@ -68,9 +67,7 @@ public class LabelActivity extends BaseActivity<TagsHotCon.TagsHotV, TagsHotPres
     @Override
     protected void initData() {
         mInsh = LabelHelep.getInsh();
-        mRlvLabel.setLayoutManager(new LinearLayoutManager(LabelActivity.this, LinearLayoutManager.VERTICAL, false));
-        mMyPitchAdapter = new MyPitchAdapter(mLabels, LabelActivity.this);
-        mRlvLabel.setAdapter(mMyPitchAdapter);
+
 
         SharedPreferences label = getSharedPreferences("label", 0);
         boolean isPitch = label.getBoolean("isPitch", false);
@@ -83,28 +80,34 @@ public class LabelActivity extends BaseActivity<TagsHotCon.TagsHotV, TagsHotPres
             mPresenter.getTagsHot("");
         }
 
-        mMyPitchAdapter.setData(mLabels);
+
+        mRlvLabel.setLayoutManager(new LinearLayoutManager(LabelActivity.this, LinearLayoutManager.VERTICAL, false));
+        mMyPitchAdapter = new MyPitchAdapter(mLabels, LabelActivity.this);
+        mRlvLabel.setAdapter(mMyPitchAdapter);
+
+        mMyPitchAdapter.setOnItemListener(new MyPitchAdapter.OnItemListener() {
+            @Override
+            public void OnItemListener(Label label) {
+                if (mLabels != null){
+                    mLabels.remove(label);
+                    mMyPitchAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
 
         mRlvHot.setLayoutManager(new LinearLayoutManager(LabelActivity.this, LinearLayoutManager.VERTICAL, false));
         mMyLabelAdapter = new MyLabelAdapter(mData, LabelActivity.this);
         mRlvHot.setAdapter(mMyLabelAdapter);
-        mMyLabelAdapter.setShow(isShow);
 
-        List<Label> labels = mInsh.selectAll();
-        mLabels.clear();
-        for (int i = 0; i < labels.size(); i++) {
-            if (labels.get(i).getIsPitch() && mLabels.size() < 2) {
-                mLabels.add(labels.get(i));
-                mMyLabelAdapter.setShow(false);
-                mMyPitchAdapter.setData(mLabels);
-            } else {
-                mMyLabelAdapter.setShow(true);
-                mMyPitchAdapter.setData(mLabels);
-                Toast.makeText(LabelActivity.this, "最多可选两个标签", Toast.LENGTH_LONG).show();
+        mMyLabelAdapter.setOnItemListeners(new MyLabelAdapter.OnItemListeners() {
+            @Override
+            public void OnItemListeners(List<Label> label) {
+                mLabels = label;
+                mMyPitchAdapter.setData(label);
             }
-        }
+        });
 
-        mMyPitchAdapter.setOnItemListener(mMyLabelAdapter);
     }
 
     @Override
@@ -141,7 +144,6 @@ public class LabelActivity extends BaseActivity<TagsHotCon.TagsHotV, TagsHotPres
         }
         List<Label> labels = mInsh.selectAll();
         mMyLabelAdapter.setData(labels);
-
     }
 
     @Override
@@ -165,15 +167,15 @@ public class LabelActivity extends BaseActivity<TagsHotCon.TagsHotV, TagsHotPres
 
     @OnClick(R.id.fanhui)
     public void onViewClicked() {
+        mListener.OnItemList(mLabels);
         finish();
-        mListener.OnItemList();
     }
 
     public interface OnItemListener {
-        void OnItemList();
+        void OnItemList(List<Label> labels);
     }
 
-    public void setOnItemListener(OnItemListener listener) {
+    public static void setOnItemListener(OnItemListener listener) {
         mListener = listener;
     }
 }

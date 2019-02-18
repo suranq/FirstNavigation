@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.firstnavigation.R;
+import com.example.firstnavigation.activitys.topic.MyTopicActivity;
 import com.example.firstnavigation.activitys.user.AttentionActivity;
 import com.example.firstnavigation.activitys.user.CollectActivity;
+import com.example.firstnavigation.activitys.user.FeedbackActivity;
 import com.example.firstnavigation.activitys.user.InformActivity;
 import com.example.firstnavigation.activitys.user.ListCommentActivity;
 import com.example.firstnavigation.activitys.user.ModificationActivity;
@@ -136,8 +138,10 @@ public class MyFragment extends BaseFragment<CenterCon.CenterConV, CenterPresent
                 startActivity(new Intent(getContext(), InformActivity.class));
                 break;
             case R.id.fabiao:
+                startActivity(new Intent(getContext(), MyTopicActivity.class));
                 break;
             case R.id.fankui:
+                startActivity(new Intent(getContext(), FeedbackActivity.class));
                 break;
             case R.id.shezhi:
                 startActivity(new Intent(getContext(), ModificationActivity.class));

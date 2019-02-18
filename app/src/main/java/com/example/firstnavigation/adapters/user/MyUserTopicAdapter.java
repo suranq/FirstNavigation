@@ -53,7 +53,7 @@ public class MyUserTopicAdapter extends RecyclerView.Adapter {
             RequestOptions requestOptions = new RequestOptions().circleCrop();
             Glide.with(mCollectActivity).load(mData1.get(position).getHeadImagePath()).apply(requestOptions).into(holder1.mIvUserHead);
             holder1.mTvUserName.setText(mData1.get(position).getNickname());
-            holder1.mTvTime.setText(TimeUtils.getDifference(mData1.get(position).getPublishTime()));
+//            holder1.mTvTime.setText(TimeUtils.getDifference(mData1.get(position).getPublishTime()));
             holder1.mTvTitle.setText(mData1.get(position).getTitle());
             holder1.mTvHui.setText("A:"+mData1.get(position).getComment());
             holder1.mRlvImage.setLayoutManager(new GridLayoutManager(mCollectActivity,3));
@@ -64,7 +64,7 @@ public class MyUserTopicAdapter extends RecyclerView.Adapter {
             RequestOptions requestOptions = new RequestOptions().circleCrop();
             Glide.with(mCollectActivity).load(mData1.get(position).getHeadImagePath()).apply(requestOptions).into(holder2.mIvUserHead);
             holder2.mTvUserName.setText(mData1.get(position).getNickname());
-            holder2.mTvTime.setText(TimeUtils.getDifference(mData1.get(position).getPublishTime()));
+//            holder2.mTvTime.setText(TimeUtils.getDifference(mData1.get(position).getPublishTime()));
             holder2.mTvTitle.setText(mData1.get(position).getTitle());
             holder2.mTvHui.setText("A:"+mData1.get(position).getComment());
             holder2.mTvFenXiang.setText(mData1.get(position).getShareLink());

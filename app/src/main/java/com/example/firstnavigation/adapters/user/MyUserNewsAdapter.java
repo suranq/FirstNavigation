@@ -12,16 +12,19 @@ import com.example.firstnavigation.R;
 import com.example.firstnavigation.activitys.user.CollectActivity;
 import com.example.firstnavigation.beans.UserNews;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by 马明祥 on 2019/2/11.
  */
 
-public class MyUserNewsAdapter extends RecyclerView.Adapter{
+public class MyUserNewsAdapter extends RecyclerView.Adapter {
     private List<UserNews.FavouritNewsListBean> mData;
     private final CollectActivity mCollectActivity;
     private boolean mShow;
+    public static List<UserNews.FavouritNewsListBean> mSize = new ArrayList<>();
+    private OnItemListener mListener;
 
     public MyUserNewsAdapter(List<UserNews.FavouritNewsListBean> data, CollectActivity collectActivity) {
 
@@ -37,11 +40,11 @@ public class MyUserNewsAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final MyViewHolder holder1 = (MyViewHolder) holder;
-        if (mShow){
+        if (mShow) {
             holder1.mIvXuan.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             holder1.mIvXuan.setVisibility(View.GONE);
         }
 
@@ -49,10 +52,18 @@ public class MyUserNewsAdapter extends RecyclerView.Adapter{
         holder1.mIvXuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder1.mIvXuan.isSelected()){
+                if (holder1.mIvXuan.isSelected()) {
                     holder1.mIvXuan.setSelected(false);
-                }else {
+                    if (mListener != null) {
+                        mSize.remove(mData.get(position));
+                        mListener.OnItemListener(mSize.size());
+                    }
+                } else {
                     holder1.mIvXuan.setSelected(true);
+                    if (mListener != null) {
+                        mSize.add(mData.get(position));
+                        mListener.OnItemListener(mSize.size());
+                    }
                 }
             }
         });
@@ -85,5 +96,13 @@ public class MyUserNewsAdapter extends RecyclerView.Adapter{
     public void setData(List<UserNews.FavouritNewsListBean> data) {
         mData = data;
         notifyDataSetChanged();
+    }
+
+    public interface OnItemListener {
+        void OnItemListener(int size);
+    }
+
+    public void setOnItemListener(OnItemListener listener) {
+        mListener = listener;
     }
 }

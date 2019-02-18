@@ -15,23 +15,34 @@ import com.example.firstnavigation.adapters.MyPitchAdapter;
 import com.example.firstnavigation.shujukuBeans.Label;
 import com.example.firstnavigation.shujukuBeans.LabelHelep;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ;
  * Created by 马明祥 on 2019/2/12.
  */
 
-public class MyLabelAdapter extends RecyclerView.Adapter implements MyPitchAdapter.OnItemListener {
+public class MyLabelAdapter extends RecyclerView.Adapter {
     private List<Label> mData;
     private final LabelActivity mLabelActivity;
-    private boolean mShow;
+    private Map<Integer,Boolean> mShow = new HashMap<>();
     private OnItemListeners mListeners;
+    public static List<Label> mLabel = new ArrayList<>();
 
     public MyLabelAdapter(List<Label> data, LabelActivity labelActivity) {
 
         mData = data;
         mLabelActivity = labelActivity;
+
+    }
+
+    private void intMap(){
+        for (int i = 0; i < mData.size(); i++) {
+            mShow.put(i,false);
+        }
     }
 
     @NonNull
@@ -44,30 +55,33 @@ public class MyLabelAdapter extends RecyclerView.Adapter implements MyPitchAdapt
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final MyViewHolder holder1 = (MyViewHolder) holder;
+        holder1.setIsRecyclable(false);
         holder1.mTvBiao.setText(mData.get(position).getTag());
         holder1.mIvXuan.setSelected(mData.get(position).getIsPitch());
         holder1.mIvXuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LabelHelep insh = LabelHelep.getInsh();
-                if (!mShow) {
-                    Label label = mData.get(position);
-                    if (holder1.mIvXuan.isSelected()) {
-                        holder1.mIvXuan.setSelected(false);
-                        label.setIsPitch(false);
-                        insh.updata(label);
-                        LabelActivity.mMyPitchAdapter.notifyDataSetChanged();
-                    } else {
-                        holder1.mIvXuan.setSelected(true);
-                        label.setIsPitch(true);
-                        insh.updata(label);
+                if (holder1.mIvXuan.isSelected()) {
+                    mShow.put(position,false);
+                    holder1.mIvXuan.setSelected(mShow.get(position));
+                    mLabel.remove(mData.get(position));
+                    if (mListeners != null) {
+                        mListeners.OnItemListeners(mLabel);
                     }
                 } else {
-                    Toast.makeText(mLabelActivity, "最多可选两个标签", Toast.LENGTH_LONG).show();
+                    if (mLabel.size() < 2) {
+                        mShow.put(position,true);
+                        holder1.mIvXuan.setSelected(mShow.get(position));
+                        mLabel.add(mData.get(position));
+                    } else {
+                        Toast.makeText(mLabelActivity, "最多可选两个标签", Toast.LENGTH_LONG).show();
+                    }
+                    if (mListeners != null) {
+                        mListeners.OnItemListeners(mLabel);
+                    }
                 }
             }
         });
-
     }
 
     @Override
@@ -80,16 +94,7 @@ public class MyLabelAdapter extends RecyclerView.Adapter implements MyPitchAdapt
 
     public void setData(List<Label> data) {
         mData = data;
-        notifyDataSetChanged();
-    }
-
-    public void setShow(boolean show) {
-        mShow = show;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public void OnItemListener() {
+        intMap();
         notifyDataSetChanged();
     }
 
@@ -105,11 +110,11 @@ public class MyLabelAdapter extends RecyclerView.Adapter implements MyPitchAdapt
         }
     }
 
-    public interface OnItemListeners{
-        void OnItemListeners();
+    public interface OnItemListeners {
+        void OnItemListeners(List<Label> label);
     }
 
-    public void setOnItemListeners(OnItemListeners listeners){
+    public void setOnItemListeners(OnItemListeners listeners) {
         mListeners = listeners;
     }
 

@@ -124,5 +124,5 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.2'
     compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
     compile 'q.rorbin:VerticalTabLayout:1.2.5'
-
+    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'  //上传多张图片
 }

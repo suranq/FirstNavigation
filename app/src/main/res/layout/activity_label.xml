@@ -22,7 +22,7 @@
         <TextView
             android:text="选择标签"
             android:layout_gravity="center"
-            android:textSize="@dimen/dp_13"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/colorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -62,7 +62,7 @@
                 android:text="完成"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dp_25"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_14"
                 android:textColor="@color/colorPuhlish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -75,7 +75,7 @@
         <TextView
             android:text="@string/custom"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/dp_14"
+            android:textSize="@dimen/sp_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RelativeLayout
@@ -110,7 +110,7 @@
         android:layout_marginTop="@dimen/dp_17"
         android:layout_marginBottom="@dimen/dp_17"
         android:layout_marginLeft="@dimen/dp_17"
-        android:textSize="@dimen/dp_14"
+        android:textSize="@dimen/sp_14"
         android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

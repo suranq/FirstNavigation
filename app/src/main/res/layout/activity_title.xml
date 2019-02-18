@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:text="@string/mypindao"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dp_20" />
+            android:textSize="@dimen/sp_20" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -79,7 +79,7 @@
         android:layout_gravity="center"
         android:textColor="@color/colorBlack"
         android:text="@string/Recommend"
-        android:textSize="@dimen/dp_18"
+        android:textSize="@dimen/sp_18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

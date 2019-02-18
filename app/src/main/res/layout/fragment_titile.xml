@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/frame"
-    tools:context="com.example.firstnavigation.fragments.TitileFragment">
+    tools:context="com.example.firstnavigation.fragments.information.TitileFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <com.jcodecraeer.xrecyclerview.XRecyclerView

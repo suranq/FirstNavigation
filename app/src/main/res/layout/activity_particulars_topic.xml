@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/share"
                 android:textColor="@color/colorBlue"
-                android:textSize="@dimen/dp_18" />
+                android:textSize="@dimen/sp_18" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/hot"
-                android:textSize="@dimen/dp_12" />
+                android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
         <RelativeLayout
@@ -94,7 +94,7 @@
                 android:layout_marginTop="@dimen/dp_7_5"
                 android:text="@string/search"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/dp_17" />
+                android:textSize="@dimen/sp_17" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_iamge"
@@ -154,7 +154,7 @@
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginTop="@dimen/dp_15"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/dp_17" />
+                android:textSize="@dimen/sp_17" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -164,7 +164,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_discuss"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15" />
 
@@ -244,7 +245,6 @@
                         android:layout_marginLeft="@dimen/dp_7_5"
                         android:text="收藏" />
                 </LinearLayout>
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.firstnavigation.R;
 import com.example.firstnavigation.beans.DownList;
+import com.example.firstnavigation.utils.SystemUtil;
 import com.example.firstnavigation.utils.TimeUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -73,48 +74,54 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
     private void getTHREE(int position, RecyclerView.ViewHolder holder) {
         MyItemSan myItemSan = (MyItemSan) holder;
         myItemSan.mTvTitle.setText(mData.get(position).getTitle());
-        Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSan.mIvTu1);
-        Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSan.mIvTu3);
-        Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSan.mIvTu2);
+        if (SystemUtil.isOpen()) {
+            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSan.mIvTu1);
+            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSan.mIvTu3);
+            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSan.mIvTu2);
+        }
         myItemSan.mIvStick.setImageResource(R.mipmap.news_top3);
         myItemSan.mIvCha.setImageResource(R.mipmap.news_x3);
         myItemSan.mTvThread.setText(mData.get(position).getPageviews() + "跟帖");
-        myItemSan.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+        myItemSan.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
         myItemSan.mTvwebsite.setText("新华网");
 
-        chacha(myItemSan.mIvCha,position);
+        chacha(myItemSan.mIvCha, position);
 
-        skip(myItemSan.itemView,position);
+        skip(myItemSan.itemView, position);
     }
 
     private void getTWO(int position, RecyclerView.ViewHolder holder) {
         MyItemSi myItemSi = (MyItemSi) holder;
         myItemSi.mTvTitle.setText(mData.get(position).getTitle());
-        Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSi.mIv);
+        if (SystemUtil.isOpen()) {
+            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myItemSi.mIv);
+        }
         myItemSi.mIvStick.setImageResource(R.mipmap.news_top3);
         myItemSi.mIvCha.setImageResource(R.mipmap.news_x3);
         myItemSi.mTvThread.setText(mData.get(position).getPageviews() + "跟帖");
-        myItemSi.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+        myItemSi.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
         myItemSi.mTvwebsite.setText("新华网");
 
-        chacha(myItemSi.mIvCha,position);
+        chacha(myItemSi.mIvCha, position);
 
-        skip(myItemSi.itemView,position);
+        skip(myItemSi.itemView, position);
     }
 
     private void getONE(int position, RecyclerView.ViewHolder holder) {
         MyTimeTeim myTimeTeim = (MyTimeTeim) holder;
         myTimeTeim.mTvTitle.setText(mData.get(position).getTitle());
-        Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myTimeTeim.mIvImage);
+        if (SystemUtil.isOpen()) {
+            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(myTimeTeim.mIvImage);
+        }
         myTimeTeim.mIvStick.setImageResource(R.mipmap.news_top3);
         myTimeTeim.mIvCha.setImageResource(R.mipmap.news_x3);
         myTimeTeim.mTvThread.setText(mData.get(position).getPageviews() + "跟帖");
-        myTimeTeim.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+        myTimeTeim.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
         myTimeTeim.mTvwebsite.setText("新华网");
 
-        chacha(myTimeTeim.mIvCha,position);
+        chacha(myTimeTeim.mIvCha, position);
 
-        skip(myTimeTeim.itemView,position);
+        skip(myTimeTeim.itemView, position);
 
     }
 
@@ -122,7 +129,7 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener != null){
+                if (mListener != null) {
                     mListener.OnItemListener(mData.get(position));
                 }
             }
@@ -143,11 +150,11 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
         MyTimeText myTimeText = (MyTimeText) holder;
         myTimeText.mTvtitle.setText(mData.get(position).getTitle());
         myTimeText.mIvStick.setImageResource(R.mipmap.news_top3);
-        myTimeText.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+        myTimeText.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
         myTimeText.mTvwebsite.setText("新华网");
         myTimeText.mTvThread.setText(mData.get(position).getPageviews() + "跟帖");
 
-        skip(myTimeText.itemView,position);
+        skip(myTimeText.itemView, position);
     }
 
     @Override
@@ -267,11 +274,11 @@ public class MyInformationAdapter extends XRecyclerView.Adapter {
         }
     }
 
-    public interface OnItemListener{
+    public interface OnItemListener {
         void OnItemListener(DownList.NewListBean newListBean);
     }
 
-    public void setOnItemListener(OnItemListener listener){
+    public void setOnItemListener(OnItemListener listener) {
         mListener = listener;
     }
 }

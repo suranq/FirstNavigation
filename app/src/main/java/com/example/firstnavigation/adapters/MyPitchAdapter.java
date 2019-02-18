@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
 public class MyPitchAdapter extends RecyclerView.Adapter {
     private List<Label> mLabels;
     private final LabelActivity mLabelActivity;
-    private List<Label> mData;
     private OnItemListener mListener;
 
     public MyPitchAdapter(List<Label> labels, LabelActivity labelActivity) {
@@ -44,18 +43,16 @@ public class MyPitchAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ViewHolder holder1 = (ViewHolder) holder;
         holder1.mTvBiao.setText(mLabels.get(position).getTag());
-        holder1.mIvShan.setOnClickListener(new View.OnClickListener() {
+
+        holder1.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLabels.remove(mLabels.get(position));
-                LabelHelep insh = LabelHelep.getInsh();
-                Label label = mLabels.get(position);
-                label.setIsPitch(false);
-                insh.updata(label);
-                notifyDataSetChanged();
-
+                if (mListener != null){
+                    mListener.OnItemListener(mLabels.get(position));
+                }
             }
         });
+
     }
 
     @Override
@@ -67,7 +64,7 @@ public class MyPitchAdapter extends RecyclerView.Adapter {
     }
 
     public void setData(List<Label> data) {
-        mData = data;
+        mLabels = data;
         notifyDataSetChanged();
     }
 
@@ -84,7 +81,7 @@ public class MyPitchAdapter extends RecyclerView.Adapter {
     }
 
     public interface OnItemListener{
-        void OnItemListener();
+        void OnItemListener(Label label);
     }
 
     public void setOnItemListener(OnItemListener listener){

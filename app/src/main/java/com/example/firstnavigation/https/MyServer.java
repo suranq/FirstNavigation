@@ -8,6 +8,8 @@ import com.example.firstnavigation.beans.DownList;
 import com.example.firstnavigation.beans.Favourite;
 import com.example.firstnavigation.beans.Follow;
 import com.example.firstnavigation.beans.HeadImage;
+import com.example.firstnavigation.beans.HomeList;
+import com.example.firstnavigation.beans.HomePage;
 import com.example.firstnavigation.beans.Hot;
 import com.example.firstnavigation.beans.Info;
 import com.example.firstnavigation.beans.InfoTopic;
@@ -18,8 +20,10 @@ import com.example.firstnavigation.beans.ListFollow;
 import com.example.firstnavigation.beans.ListNews;
 import com.example.firstnavigation.beans.ListNotify;
 import com.example.firstnavigation.beans.ListProfession;
+import com.example.firstnavigation.beans.ListTopic;
 import com.example.firstnavigation.beans.LoadTopic;
 import com.example.firstnavigation.beans.MoreFollow;
+import com.example.firstnavigation.beans.Question;
 import com.example.firstnavigation.beans.RelevantNews;
 import com.example.firstnavigation.beans.SearchBean;
 import com.example.firstnavigation.beans.TagsHot;
@@ -138,7 +142,7 @@ public interface MyServer {
      * */
     @POST
 //    @Headers("Content-Type:multipart/form-data")
-    Observable<BaseData<InsertTopic>>getInsertTopic(@Url String url,@Body RequestBody requestBody);
+    Observable<InsertTopic>getInsertTopic(@Url String url,@Body RequestBody requestBody);
 
     /**
      * 个人信息
@@ -251,4 +255,33 @@ public interface MyServer {
     @POST
     @Headers("Content-Type:application/json")
     Observable<BaseData<MoreFollow>>getMoreFollow(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 常见问题
+     * */
+    @POST
+    @Headers("Content-Type:application/x-www-form-urlencoded")
+    Observable<Question>getQuestion(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 用户信息
+     * */
+    @POST
+    @Headers("Content-Type:application/x-www-form-urlencoded")
+    Observable<BaseData<HomePage>>getHomePage(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 用户话题
+     * */
+    @POST
+    @Headers("Content-Type:application/json")
+    Observable<BaseData<HomeList>>getHomeList(@Url String url,@Body RequestBody requestBody);
+
+    /**
+     * 我的话题
+     * */
+    @POST
+    @Headers("Content-Type:application/x-www-form-urlencoded")
+    Observable<BaseData<ListTopic>>getListTopic(@Url String url,@Body RequestBody requestBody);
+
 }

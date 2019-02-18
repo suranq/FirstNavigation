@@ -2,8 +2,8 @@ package com.example.firstnavigation.presenter;
 
 import com.example.firstnavigation.base.BasePresenter;
 import com.example.firstnavigation.beans.InsertTopic;
+import com.example.firstnavigation.beans.ToTopic;
 import com.example.firstnavigation.contact.InsertTopicCon;
-import com.example.firstnavigation.json.JsonInsertTopic;
 import com.example.firstnavigation.modlue.InsertTopicModlue;
 
 /**
@@ -13,10 +13,10 @@ import com.example.firstnavigation.modlue.InsertTopicModlue;
 public class InsertTopicPresenter<V extends InsertTopicCon.InsertTopicV>extends BasePresenter<InsertTopicCon.InsertTopicV> implements InsertTopicCon.InsertTopicP, InsertTopicCon.InsertTopicM {
     private InsertTopicModlue mInsertTopicModlue = new InsertTopicModlue();
     @Override
-    public void getInsertTopic(JsonInsertTopic jsonInsertTopic) {
+    public void getInsertTopic(ToTopic toTopic) {
         if (mView != null){
             mView.showProgressbar();
-            mInsertTopicModlue.getInsertTopic(jsonInsertTopic,this);
+            mInsertTopicModlue.getInsertTopic(toTopic,this);
         }
     }
 
@@ -49,4 +49,6 @@ public class InsertTopicPresenter<V extends InsertTopicCon.InsertTopicV>extends 
             mView.showInsertTopic(insertTopic);
         }
     }
+
+
 }

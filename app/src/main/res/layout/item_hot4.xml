@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/tv_figure"
         android:text="@string/hot"
-        android:textSize="@dimen/dp_20"
+        android:textSize="@dimen/sp_20"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/tv_hot"
         android:text="@string/hot"
-        android:textSize="@dimen/dp_20"
+        android:textSize="@dimen/sp_20"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

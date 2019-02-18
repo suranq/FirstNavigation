@@ -23,6 +23,7 @@ import butterknife.OnClick;
 
 public class ProfessionActivity extends BaseActivity<ListProfessionCon.ListProfessionV, ListProfessionPresenter<ListProfessionCon.ListProfessionV>> implements ListProfessionCon.ListProfessionV {
 
+    private static OnItemListener sListener;
     @BindView(R.id.iv_fan)
     ImageView mIvFan;
     @BindView(R.id.toolbar)
@@ -45,8 +46,16 @@ public class ProfessionActivity extends BaseActivity<ListProfessionCon.ListProfe
     protected void initData() {
         mPresenter.getListProfession("");
         mRlvZhiye.setLayoutManager(new LinearLayoutManager(ProfessionActivity.this,LinearLayoutManager.VERTICAL,false));
-        mMyListProfessionAdapter = new MyListProfessionAdapter(mData,ProfessionActivity.this);
+        mMyListProfessionAdapter = new MyListProfessionAdapter(mData,ProfessionActivity.this,mRlvZhiye);
         mRlvZhiye.setAdapter(mMyListProfessionAdapter);
+
+        mMyListProfessionAdapter.setOnItemListener(new MyListProfessionAdapter.OnItemListener() {
+            @Override
+            public void OnItemListener(ListProfession.ProfessionListBean listBean) {
+                sListener.OnItemListener(listBean);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -83,5 +92,13 @@ public class ProfessionActivity extends BaseActivity<ListProfessionCon.ListProfe
             case R.id.bt_wan:
                 break;
         }
+    }
+
+    public interface OnItemListener{
+        void OnItemListener(ListProfession.ProfessionListBean professionListBean);
+    }
+
+    public static void setOnItemListener(OnItemListener listener){
+        sListener = listener;
     }
 }

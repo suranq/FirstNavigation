@@ -1,4 +1,4 @@
-package com.example.firstnavigation.fragments;
+package com.example.firstnavigation.fragments.information;
 
 
 import android.annotation.SuppressLint;

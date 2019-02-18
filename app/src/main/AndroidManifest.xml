@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.firstnavigation"> <!-- 友盟统计 -->
     <uses-sdk android:minSdkVersion="8" />
 
@@ -38,6 +39,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- 储存卡的读写权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 调用相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".global.App"
         android:allowBackup="true"
@@ -53,6 +60,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".typeface.SetSizeActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -63,6 +71,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <!-- QQ -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -108,7 +117,9 @@
         <activity android:name=".activitys.information.ParticularsActivity" />
         <activity android:name=".activitys.information.TitleActivity" />
         <activity android:name=".activitys.topic.ParticularsTopicActivity" />
-        <activity android:name=".activitys.topic.PublishActivity" />
+        <activity
+            android:name=".activitys.topic.PublishActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".activitys.topic.LabelActivity" />
         <activity android:name=".activitys.user.ModificationActivity" />
         <activity android:name=".activitys.user.GeRenActivity" />
@@ -119,7 +130,12 @@
         <activity android:name=".activitys.user.ListCommentActivity" />
         <activity android:name=".activitys.user.InformActivity" />
         <activity android:name=".activitys.user.MoreActivity" />
-        <activity android:name=".activitys.user.MoreAttenActivity"></activity>
+        <activity android:name=".activitys.user.MoreAttenActivity" />
+        <activity android:name=".activitys.user.SynopsisActivity" />
+        <activity android:name=".activitys.user.FeedbackActivity" />
+        <activity android:name=".activitys.user.WentiActivity" />
+        <activity android:name=".activitys.topic.HomePageActivity" />
+        <activity android:name=".activitys.topic.MyTopicActivity"></activity>
     </application>
 
 </manifest>

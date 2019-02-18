@@ -9,7 +9,7 @@
         android:layout_marginRight="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_20"
         android:id="@+id/tv_title"
-        android:textSize="@dimen/dp_20"
+        android:textSize="@dimen/sp_20"
         android:text="@string/app"
         android:textColor="@color/colorBlack"
         android:layout_width="match_parent"

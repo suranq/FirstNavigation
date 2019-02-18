@@ -25,7 +25,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_userName"
-                android:textSize="@dimen/dp_18"
+                android:textSize="@dimen/sp_18"
                 android:textColor="@color/colorPuhlish"
                 android:text="@string/bianji"
                 android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:id="@+id/tv_time"
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/bianji"
-                android:textSize="@dimen/dp_12"
+                android:textSize="@dimen/sp_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -46,7 +46,7 @@
         android:layout_marginRight="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_7_5"
         android:layout_marginBottom="@dimen/dp_7_5"
-        android:textSize="@dimen/dp_17"
+        android:textSize="@dimen/sp_17"
         android:textColor="@color/colorBlack"
         android:text="@string/bianji"
         android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_fenxiang"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_14"
                 android:text="@string/bianji"
                 android:layout_marginTop="@dimen/dp_7_5"
                 android:layout_width="match_parent"
@@ -94,7 +94,7 @@
         android:text="最新参与"
         android:layout_marginTop="@dimen/dp_7_5"
         android:layout_marginLeft="@dimen/dp_15"
-        android:textSize="@dimen/dp_12"
+        android:textSize="@dimen/sp_12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -116,7 +116,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/tv_hui"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_14"
                 android:text="@string/bianji"
                 android:maxLines="3"
                 android:layout_width="match_parent"

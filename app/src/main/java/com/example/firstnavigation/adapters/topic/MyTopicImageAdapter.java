@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.firstnavigation.R;
 import com.example.firstnavigation.activitys.topic.ParticularsTopicActivity;
+import com.example.firstnavigation.utils.SystemUtil;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by 马明祥 on 2019/2/6.
  */
 
-public class MyTopicImageAdapter extends RecyclerView.Adapter{
+public class MyTopicImageAdapter extends RecyclerView.Adapter {
     private List<String> mImageListThumb;
     private final ParticularsTopicActivity mParticularsTopicActivity;
 
@@ -37,7 +38,9 @@ public class MyTopicImageAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder holder1 = (MyViewHolder) holder;
-        Glide.with(mParticularsTopicActivity).load(mImageListThumb.get(position)).into(holder1.mIv);
+        if (SystemUtil.isOpen()) {
+            Glide.with(mParticularsTopicActivity).load(mImageListThumb.get(position)).into(holder1.mIv);
+        }
     }
 
     @Override

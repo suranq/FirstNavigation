@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.firstnavigation.R;
 import com.example.firstnavigation.beans.LoadTopic;
 import com.example.firstnavigation.beans.Topic;
+import com.example.firstnavigation.utils.SystemUtil;
 import com.example.firstnavigation.utils.TimeUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -62,51 +63,57 @@ public class MyLoadTopicAdapter extends XRecyclerView.Adapter {
             Glide.with(mContext).load(mData.get(position).getHeadImagePath()).apply(requestOptions).into(holder1.mIvUserHead);
             holder1.mTvtitle.setText(mData.get(position).getTitle());
             holder1.mTvUserName.setText(mData.get(position).getNickname());
-            holder1.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+            holder1.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
             holder1.mTvLike.setText(mData.get(position).getLikes() + "");
             holder1.mTvComment.setText(mData.get(position).getComments() + "");
             holder1.mTvRead.setText(mData.get(position).getPageviews() + "");
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder1.mIvTu);
-            getOnItem(holder1,position);
+            if (SystemUtil.isOpen()) {
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder1.mIvTu);
+            }
+            getOnItem(holder1, position);
         } else if (itemViewType == 2) {
             MyViewHolder2 holder2 = (MyViewHolder2) holder;
             RequestOptions requestOptions = new RequestOptions().circleCrop();
             Glide.with(mContext).load(mData.get(position).getHeadImagePath()).apply(requestOptions).into(holder2.mIvUserHead);
             holder2.mTvtitle.setText(mData.get(position).getTitle());
             holder2.mTvUserName.setText(mData.get(position).getNickname());
-            holder2.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+            holder2.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
             holder2.mTvLike.setText(mData.get(position).getLikes() + "");
             holder2.mTvComment.setText(mData.get(position).getComments() + "");
             holder2.mTvRead.setText(mData.get(position).getPageviews() + "");
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder2.mIvTu1);
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder2.mIvTu2);
-            getOnItem(holder2,position);
+            if (SystemUtil.isOpen()) {
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder2.mIvTu1);
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder2.mIvTu2);
+            }
+            getOnItem(holder2, position);
         } else if (itemViewType == 3) {
             MyViewHolder3 holder3 = (MyViewHolder3) holder;
             RequestOptions requestOptions = new RequestOptions().circleCrop();
             Glide.with(mContext).load(mData.get(position).getHeadImagePath()).apply(requestOptions).into(holder3.mIvUserHead);
             holder3.mTvtitle.setText(mData.get(position).getTitle());
             holder3.mTvUserName.setText(mData.get(position).getNickname());
-            holder3.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+            holder3.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
             holder3.mTvLike.setText(mData.get(position).getLikes() + "");
             holder3.mTvComment.setText(mData.get(position).getComments() + "");
             holder3.mTvRead.setText(mData.get(position).getPageviews() + "");
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder3.mIvTu1);
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder3.mIvTu2);
-            Glide.with(mContext).load(mData.get(position).getImageListThumb().get(2)).into(holder3.mIvTu3);
-            getOnItem(holder3,position);
+            if (SystemUtil.isOpen()) {
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(0)).into(holder3.mIvTu1);
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(1)).into(holder3.mIvTu2);
+                Glide.with(mContext).load(mData.get(position).getImageListThumb().get(2)).into(holder3.mIvTu3);
+            }
+            getOnItem(holder3, position);
         } else {
             MyViewHolder4 holder4 = (MyViewHolder4) holder;
             RequestOptions requestOptions = new RequestOptions().circleCrop();
             Glide.with(mContext).load(mData.get(position).getHeadImagePath()).apply(requestOptions).into(holder4.mIvUserHead);
             holder4.mTvtitle.setText(mData.get(position).getTitle());
             holder4.mTvUserName.setText(mData.get(position).getNickname());
-            holder4.mTvtime.setText(TimeUtils.getDifference(mData.get(position).getPublishTime()));
+            holder4.mTvtime.setText(TimeUtils.gettime(mData.get(position).getPublishTime()));
             holder4.mTvLike.setText(mData.get(position).getLikes() + "");
             holder4.mTvComment.setText(mData.get(position).getComments() + "");
             holder4.mTvRead.setText(mData.get(position).getPageviews() + "");
             holder4.mTvShare.setText(mData.get(position).getShareLink());
-            getOnItem(holder4,position);
+            getOnItem(holder4, position);
         }
     }
 
@@ -114,7 +121,7 @@ public class MyLoadTopicAdapter extends XRecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener != null){
+                if (mListener != null) {
                     mListener.OnItemListener(mData.get(position));
                 }
             }
@@ -249,16 +256,16 @@ public class MyLoadTopicAdapter extends XRecyclerView.Adapter {
             } else {
                 return 4;
             }
-        }else {
+        } else {
             return 4;
         }
     }
 
-    public interface OnItemListener{
+    public interface OnItemListener {
         void OnItemListener(LoadTopic.TopicListBean topicListBean);
     }
 
-    public void setOnItemListener(OnItemListener listener){
+    public void setOnItemListener(OnItemListener listener) {
         mListener = listener;
     }
 }

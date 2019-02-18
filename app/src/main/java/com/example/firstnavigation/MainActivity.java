@@ -16,8 +16,12 @@ import com.example.firstnavigation.activitys.information.InformationActivity;
 import com.example.firstnavigation.activitys.MessageActivity;
 import com.example.firstnavigation.activitys.SanfangActivity;
 import com.example.firstnavigation.base.activity.SimpleActivity;
+import com.example.firstnavigation.dao.WifiDao;
 import com.example.firstnavigation.shujukuBeans.DataBaseHelep;
 import com.example.firstnavigation.shujukuBeans.Studnet;
+import com.example.firstnavigation.shujukuBeans.Wifi;
+import com.example.firstnavigation.shujukuBeans.WifiHelep;
+import com.example.firstnavigation.utils.SystemUtil;
 import com.example.firstnavigation.utils.TimeUtils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -69,6 +73,12 @@ public class MainActivity extends SimpleActivity {
 
     @Override
     protected void initData() {
+        List<Wifi> wifis = WifiHelep.getInsh().selectAll();
+        if (wifis != null && wifis.size() > 0) {
+
+        } else {
+            WifiHelep.getInsh().insert(new Wifi(null, true, SystemUtil.isWifiConnected()));
+        }
 
         mInsh = DataBaseHelep.getInsh();
         mBtLogin.setClickable(false);

@@ -16,7 +16,6 @@ import com.example.firstnavigation.adapters.MyFragmentAdapter;
 import com.example.firstnavigation.base.fragment.BaseFragment;
 import com.example.firstnavigation.beans.ListNews;
 import com.example.firstnavigation.contact.ListNewsCon;
-import com.example.firstnavigation.fragments.TitileFragment;
 import com.example.firstnavigation.presenter.ListNewsPresenter;
 import com.example.firstnavigation.shujukuBeans.Information;
 import com.example.firstnavigation.shujukuBeans.InformationHelep;

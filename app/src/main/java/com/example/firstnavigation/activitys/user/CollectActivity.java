@@ -1,9 +1,9 @@
 package com.example.firstnavigation.activitys.user;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CollectActivity extends BaseActivity<CollectCon.CollectV, CollectPresenter<CollectCon.CollectV>> implements CollectCon.CollectV {
@@ -48,10 +49,13 @@ public class CollectActivity extends BaseActivity<CollectCon.CollectV, CollectPr
     LinearLayout mLinear;
     @BindView(R.id.iv_fan)
     ImageView mIvFan;
+    @BindView(R.id.tv_one)
+    TextView mTvOne;
+    @BindView(R.id.tv_two)
+    TextView mTvTwo;
     private List<UserNews.FavouritNewsListBean> mData = new ArrayList<>();
     private MyUserNewsAdapter mMyUserNewsAdapter;
     private boolean isShow;
-    private List<UserTopic.FavouritTopicListBean> mData1 = new ArrayList<>();
     private MyUserTopicAdapter mMyUserTopicAdapter;
 
     @Override
@@ -66,10 +70,17 @@ public class CollectActivity extends BaseActivity<CollectCon.CollectV, CollectPr
         setSupportActionBar(mToolbar);
 
         mPresenter.getUserNews("efe7538b97f14d11952f5a13e1c7f7cd", "0");
-
+        mPresenter.getUserTopic("efe7538b97f14d11952f5a13e1c7f7cd", "0");
         mRlvWen.setLayoutManager(new LinearLayoutManager(CollectActivity.this, LinearLayoutManager.VERTICAL, false));
         mMyUserNewsAdapter = new MyUserNewsAdapter(mData, CollectActivity.this);
         mRlvWen.setAdapter(mMyUserNewsAdapter);
+
+        mMyUserNewsAdapter.setOnItemListener(new MyUserNewsAdapter.OnItemListener() {
+            @Override
+            public void OnItemListener(int size) {
+                mTvFigure.setText("(" + size + ")");
+            }
+        });
 
     }
 
@@ -95,32 +106,30 @@ public class CollectActivity extends BaseActivity<CollectCon.CollectV, CollectPr
 
     @Override
     public void showUserNews(UserNews userNews) {
+        mData = userNews.getFavouritNewsList();
         mMyUserNewsAdapter.setData(userNews.getFavouritNewsList());
         mMyUserNewsAdapter.setShow(isShow);
     }
 
     @Override
     public void showUserTopic(UserTopic userTopic) {
-        Log.e("hhhhhhhhh", userTopic.getFavouritTopicList().get(0).getNickname());
         mRlvHua.setLayoutManager(new LinearLayoutManager(CollectActivity.this, LinearLayoutManager.VERTICAL, false));
         mMyUserTopicAdapter = new MyUserTopicAdapter(userTopic.getFavouritTopicList(), CollectActivity.this);
         mRlvHua.setAdapter(mMyUserTopicAdapter);
     }
 
-    @OnClick({R.id.iv_huan, R.id.tv_bianji, R.id.shanchu})
+    @OnClick({R.id.tv_bianji, R.id.shanchu, R.id.tv_one, R.id.tv_two})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_huan:
-                if (mIvHuan.isSelected()) {
-                    mIvHuan.setSelected(false);
-                    mWenzhang.setVisibility(View.VISIBLE);
-                    mHuati.setVisibility(View.GONE);
-                } else {
-                    mIvHuan.setSelected(true);
-                    mWenzhang.setVisibility(View.GONE);
-                    mHuati.setVisibility(View.VISIBLE);
-                    mPresenter.getUserTopic("efe7538b97f14d11952f5a13e1c7f7cd", "0");
-                }
+            case R.id.tv_one:
+                mIvHuan.setSelected(false);
+                mWenzhang.setVisibility(View.VISIBLE);
+                mHuati.setVisibility(View.GONE);
+                break;
+            case R.id.tv_two:
+                mIvHuan.setSelected(true);
+                mWenzhang.setVisibility(View.GONE);
+                mHuati.setVisibility(View.VISIBLE);
                 break;
             case R.id.tv_bianji:
                 String string = mTvBianji.getText().toString();
@@ -135,6 +144,15 @@ public class CollectActivity extends BaseActivity<CollectCon.CollectV, CollectPr
                 }
                 break;
             case R.id.shanchu:
+                List<UserNews.FavouritNewsListBean> mSize = MyUserNewsAdapter.mSize;
+                for (int i = 0; i < mSize.size(); i++) {
+                    UserNews.FavouritNewsListBean favouritNewsListBean = mSize.get(i);
+                    mData.remove(favouritNewsListBean);
+                    mMyUserNewsAdapter.setData(mData);
+                }
+                mSize.clear();
+                mTvFigure.setText("");
+                mMyUserNewsAdapter.notifyDataSetChanged();
                 break;
         }
     }
